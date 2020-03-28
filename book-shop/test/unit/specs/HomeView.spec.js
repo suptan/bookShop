@@ -2,48 +2,22 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import HomeView from '@/views/Home';
 import router from '@/router';
+import { createStoreMocks, mockBooks } from '../__mocks__';
 
 jest.mock('@/router', () => ({
   push: jest.fn(),
 }));
+jest.mock('@/store');
 const localVue = createLocalVue();
 
 localVue.use(Vuex);
 
 describe('Home.vue', () => {
   let wrapper;
-  let getters;
-  let actions;
   let store;
-  let mockBooks;
 
   beforeEach(() => {
-    mockBooks = [{
-      cover: 'pic1',
-      price: '111',
-      title: 'foo',
-      id: '330',
-    }, {
-      cover: 'pic2',
-      price: '123',
-      title: 'bar',
-      id: '431',
-    }];
-    actions = {
-      getBooks: jest.fn(),
-    };
-    getters = {
-      books: () => mockBooks,
-    };
-    store = new Vuex.Store({
-      modules: {
-        products: {
-          namespaced: true,
-          actions,
-          getters,
-        },
-      },
-    });
+    store = createStoreMocks().store;
   });
 
   afterEach(() => {
