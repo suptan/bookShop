@@ -28,3 +28,5 @@ npm test
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+[commit guideline](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-guidelines)
