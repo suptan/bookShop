@@ -1,0 +1,7 @@
+@import '@/assets/variable.scss';
+.HomeView {
+  &__button {
+    border-radius: $radius-small;
+    color: $main-color;
+  }
+}
