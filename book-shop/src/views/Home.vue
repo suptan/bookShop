@@ -30,12 +30,5 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '@/assets/variable.scss';
-.HomeView {
-  &__button {
-    border-radius: $radius-small;
-    color: $main-color;
-  }
-}
+<style lang="scss" scoped src="@/assets/styles/home-view.scss">
 </style>

@@ -1,7 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import HomeView from '@/views/Home';
-import Page2View from '@/views/Page2';
 
 Vue.use(Router);
 
@@ -14,11 +12,11 @@ Vue.use(Router);
 const routes = [{
   path: '/',
   name: 'HomeView',
-  component: HomeView,
+  component: () => import(/* webpackPrefetch: true */'@/views/Home'),
 }, {
   path: '/page',
   name: 'Page2View',
-  component: Page2View,
+  component: () => import(/* webpackPrefetch: true */'@/views/Page2'),
 }];
 
 export default new Router({
