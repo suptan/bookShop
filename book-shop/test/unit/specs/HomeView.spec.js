@@ -61,7 +61,7 @@ describe('Home.vue', () => {
     expect(results).toBe(mockBooks);
   });
   describe('Methods', () => {
-    describe('naivgate', () => {
+    describe('navigate', () => {
       it('should be call when click submit', () => {
         wrapper = shallowMount(HomeView, { store, localVue });
         wrapper.vm.navigate();
