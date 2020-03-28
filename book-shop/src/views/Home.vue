@@ -1,14 +1,16 @@
 <template>
   <div>
     <h1>Home</h1>
+    <button v-on:click="navigate()">Go</button>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import router from '../router'
 
 export default {
-    name: 'HomeView',
+  name: 'HomeView',
   computed: {
     ...mapGetters({
       books: 'products/books',
@@ -17,5 +19,10 @@ export default {
   mounted() {
     this.$store.dispatch('products/getBooks');
   },
+  methods: {
+      navigate() {
+          router.push({ name: 'Page2View' });
+      }
+  }
 }
 </script>
