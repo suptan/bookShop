@@ -1,7 +1,10 @@
 <template>
   <div>
     <h1>Home</h1>
-    <button v-on:click="navigate()">Go</button>
+    <button date-qe="submit" v-on:click="navigate()">Go</button>
+    <div v-for="book in books" :key="book.id">
+        <h1 data-qe="book-title">{{ book.title }}</h1>
+    </div>
   </div>
 </template>
 
