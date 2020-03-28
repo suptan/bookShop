@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Home</h1>
-    <button date-qe="submit" v-on:click="navigate()">Go</button>
+    <button date-qe="submit" v-on:click="navigate()" :class="`${$options.name}__button`">Go</button>
     <div v-for="book in books" :key="book.id">
         <h1 data-qe="book-title">{{ book.title }}</h1>
     </div>
@@ -29,3 +29,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '@/assets/variable.scss';
+.HomeView {
+  &__button {
+    border-radius: $radius-small;
+    color: $main-color;
+  }
+}
+</style>
