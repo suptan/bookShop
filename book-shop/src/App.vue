@@ -8,6 +8,15 @@
 <script>
 export default {
   name: 'App',
+  created() {
+    console.log('I was born here');
+  },
+  mounted() {
+    console.log('I was render here');
+  },
+  beforeDestroy() {
+    console.log('This is my last word');
+  },
 };
 </script>
 
