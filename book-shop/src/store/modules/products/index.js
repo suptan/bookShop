@@ -12,12 +12,14 @@ import mutations from './mutations';
 /**
  * @typedef {Object} BooksState
  * @property {Book[]} books
+ * @property {Book[]} displayBooks
  */
 /**
  * @type {BooksState} state
  */
 const state = {
   books: [],
+  displayBooks: [],
 };
 
 export default {

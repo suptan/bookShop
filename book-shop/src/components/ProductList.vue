@@ -1,7 +1,7 @@
 <template>
   <div :class="`${$options.name}`">
     <div :class="`${$options.name}__header`">
-      <SearchArea />
+      <search-area />
     </div>
     <div :class="`${$options.name}__content`">
       <product-list-item v-for="book in books"
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import ProductListItem from './ProductListItem';
 import SearchArea from './SearchArea';
 
@@ -23,10 +24,10 @@ export default {
     ProductListItem,
     SearchArea,
   },
-  props: {
-    books: {
-      type: Array,
-    }
+  computed: {
+    ...mapGetters({
+      books: 'products/displayBooks',
+    }),
   },
 }
 </script>

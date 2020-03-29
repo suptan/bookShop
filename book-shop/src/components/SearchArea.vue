@@ -3,6 +3,7 @@
     <div :class="`${$options.name}__content`">
       <span :class="`${$options.name}__inputBox`">
         <input
+          v-model="txtInput"
           type="text"
           placeholder="search books..."
           v-on:keyup.enter="onEnter"
@@ -20,11 +21,17 @@
 </template>
 
 <script>
+import store from '@/store';
 export default {
   name: 'SearchArea',
+  data() {
+    return {
+      txtInput: '',
+    }
+  },
   methods: {
-    onEnter: () => {
-      console.log('bar');
+    onEnter: (e) => {
+      store.dispatch('products/filterBooks', e.target.value);
     }
   }
 }
