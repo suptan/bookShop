@@ -62,6 +62,24 @@ async function getRequest({ path }) {
           title: 'Harry Potter and the Order of the Phoenix (V)',
           id: '9781408855690',
         },
+        {
+          cover: 'https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4088/9781408855690.jpg',
+          price: '380',
+          title: 'Harry Potter and the Order of the Phoenix (V)',
+          id: '9781408855690',
+        },
+        {
+          cover: 'https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4088/9781408855690.jpg',
+          price: '380',
+          title: 'Harry Potter and the Order of the Phoenix (V)',
+          id: '9781408855690',
+        },
+        {
+          cover: 'https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4088/9781408855690.jpg',
+          price: '380',
+          title: 'Harry Potter and the Order of the Phoenix (V)',
+          id: '9781408855690',
+        },
       ]);
     }, 500);
   });

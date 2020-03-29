@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view/>
   </div>
 </template>
@@ -21,12 +20,30 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.cdnfonts.com/css/volte');
+html,
+body {
+  height: 100vh;
+}
+body,
+h1 {
+  margin: 0;
+}
+input[type=text] {
+  border: 0;
+  -webkit-border-radius: 0;
+  -webkit-text-size-adjust: none;
+  -webkit-appearance: none;
+}
+:focus {
+  outline: none !important;
+}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Volte', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  height: 100vh;
 }
 </style>

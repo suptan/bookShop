@@ -1,0 +1,52 @@
+@import '@/assets/responsive.scss';
+@import '@/assets/variable.scss';
+
+.ProductListItem {
+  display: flex;
+  min-width: 320px;
+  border-bottom: 1px solid $sub-color;
+  padding: $space-medium;
+  cursor: pointer;
+
+  @include mobile {
+    min-width: auto;
+  }
+
+  &__thumb {
+    display: flex;
+    padding: 0 $space-large;
+
+    @include mobile {
+      padding: 0;
+      & > img {
+        width: 60px;
+      }
+    }
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    @include mobile {
+      width: fit-content;
+    }
+  }
+
+  &__title {
+    @include mobile {
+      max-width: 150px;
+    }
+  }
+
+  &__price {
+    font-size: $price-font-size;
+
+    @include mobile {
+      font-size: $price-mobile-font-size;
+      font-weight: bold;
+    }
+  }
+}
