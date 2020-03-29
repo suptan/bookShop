@@ -2,6 +2,11 @@
 @import '@/assets/variable.scss';
 
 .HomeView {
+
+  &__content {
+    display: flex;
+  }
+
   &__title {
     padding: $section-spacing;
 

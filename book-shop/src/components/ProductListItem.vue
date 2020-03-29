@@ -1,5 +1,5 @@
 <template>
-  <div :class="`${$options.name}`">
+  <div :class="`${$options.name}`" @click="onClick(book)">
     <div :class="`${$options.name}__thumb`"><img :src="`${book.cover}`" :alt="`${book.title}`" /></div>
     <div :class="`${$options.name}__info`">
       <span :class="`${$options.name}__title`">{{ book.title }}</span>
@@ -17,6 +17,11 @@ export default {
   props: {
     book: {
       type: Object
+    }
+  },
+  methods: {
+    onClick(book) {
+      this.$store.dispatch('carts/addBookToCart', book)
     }
   }
 }

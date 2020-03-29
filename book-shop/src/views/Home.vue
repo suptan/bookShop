@@ -1,8 +1,13 @@
 <template>
   <layout-default>
     <div :class="`${$options.name}`">
-      <div :class="`${$options.name}__title`"><h1>Shelf</h1></div>
-      <product-list :books="books"/>
+      <div :class="`${$options.name}__content`">
+        <div :class="`${$options.name}__shelf`">
+          <div :class="`${$options.name}__title`"><h1>Shelf</h1></div>
+          <product-list :books="books"/>
+        </div>
+        <cart />
+      </div>
       <button date-qe="submit" v-on:click="navigate()" :class="`${$options.name}__button`">Go</button>
       <div v-for="book in books" :key="book.id">
           <h1 data-qe="book-title">{{ book.title }}</h1>
@@ -15,6 +20,7 @@
 import { mapGetters } from 'vuex';
 import LayoutDefault from '@/layouts/LayoutDefault'
 import ProductList from '@/components/ProductList'
+import Cart from '@/components/Cart'
 import router from '../router'
 
 export default {
@@ -22,6 +28,7 @@ export default {
   components: {
     LayoutDefault,
     ProductList,
+    Cart,
   },
   computed: {
     ...mapGetters({
@@ -34,7 +41,11 @@ export default {
   methods: {
       navigate() {
           router.push({ name: 'Page2View' });
-      }
+      },
+      // onBookClick(book) {
+      //   console.log(book);
+        
+      // }
   }
 }
 </script>

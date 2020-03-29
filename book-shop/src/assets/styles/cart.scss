@@ -1,0 +1,20 @@
+@import '@/assets/responsive.scss';
+@import '@/assets/variable.scss';
+
+.Cart {
+  margin: $section-spacing;
+  background-color: $component-bg-color;
+  border-radius: $radius-small;
+
+  @include mobile {
+    margin: 1em;
+  }
+
+  &__content {
+    display: flex;
+  }
+
+  &__row {
+    display: flex;
+  }
+}
