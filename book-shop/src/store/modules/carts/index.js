@@ -25,7 +25,7 @@ import mutations from './mutations';
  */
 /**
  * @typedef {Object} DiscountBooks
- * @property {Set<string>} harry
+ * @property {Set<Object>} harry
  */
 /**
  * @typedef {Object} CartState

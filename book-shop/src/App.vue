@@ -46,4 +46,7 @@ input[type=text] {
   color: #2c3e50;
   height: 100vh;
 }
+.cursor-pointer {
+  cursor: pointer;
+}
 </style>

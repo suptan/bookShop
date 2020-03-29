@@ -19,7 +19,9 @@ const ADD_TO_CART = (state, book) => {
   if (index === -1) {
     state.cart.item.books.push(item);
     if (book.title.includes('Harry Potter')) {
-      state.cart.discount.books.harry.add(book.id);
+      const obj = {};
+      obj[book.id] = book.price;
+      state.cart.discount.books.harry.add(obj);
     }
   } else {
     Vue.set(state.cart.item.books, index, item);
@@ -42,7 +44,9 @@ const REMOVE_FROM_CART = (state, id) => {
   const removeItem = state.cart.item.books.splice(index, 1)[0];
 
   if (typeof get(state, ['cart', 'discount', 'books', 'harry']) === 'object') {
-    state.cart.discount.books.harry.delete(removeItem.id);
+    const obj = {};
+    obj[removeItem.id] = removeItem.price;
+    state.cart.discount.books.harry.delete(obj);
   }
 
   state.cart.subTotal -= removeItem.total;
@@ -125,7 +129,8 @@ const CALCULATE_DISCOUNT = (state) => {
     subTotal,
     discount: { books: { harry } },
   } = state.cart;
-  const discountAmount = subTotal * (HARRY_DISCOUNT[harry.size - 1] / 100);
+  const basePrice = [...harry].reduce((sum, price) => sum + Object.values(price)[0], 0);
+  const discountAmount = basePrice * (HARRY_DISCOUNT[harry.size - 1] / 100);
   const total = subTotal - discountAmount;
 
   state.cart.total = total;

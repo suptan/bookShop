@@ -4,13 +4,13 @@
       <div :class="`${$options.name}__header`"><h1>Cart</h1></div>
       <div :class="`${$options.name}__content`">
         <div :class="[`${$options.name}__row`, `${$options.name}__thead`]">
-            <div @click="onClickRemoveAll()"><img src="../assets/icons/delete.png" alt="delete"></div>
+            <div @click="onClickRemoveAll()" :class="'cursor-pointer'"><img src="../assets/icons/delete.png" alt="delete"></div>
             <div>Name</div>
             <div>QTY</div>
             <div>Price</div>
         </div>
         <div :class="`${$options.name}__row`" v-for="book in item.books" :key="book.id">
-            <div @click="onClickRemove(book.id)">
+            <div @click="onClickRemove(book.id)" :class="'cursor-pointer'">
               <img src="../assets/icons/delete.png" alt="delete">
             </div>
             <div :class="`${$options.name}__label`">{{ book.title }}</div>
@@ -51,7 +51,7 @@
       </div>
       <div
         :class="`${$options.name}__footer`"
-        @click="navigate()"
+        @click="navigate(cart.total)"
       >Pay ({{ normalizeCurrency(cart.total) }})</div>
     </div>
   </div>
@@ -91,8 +91,10 @@ export default {
     normalizeCurrency(money) {
       return normalizer.THBCurrency(money);
     },
-    navigate() {
-      router.push({ name: 'Page2View' });
+    navigate(total) {
+      if (total > 0) {
+        router.push({ name: 'Page2View' });
+      }
     }
   },
 }
