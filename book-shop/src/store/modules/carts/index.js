@@ -29,6 +29,7 @@ const state = {
       books: [],
     },
     total: 0,
+    discount: 0,
   },
 };
 

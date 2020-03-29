@@ -14,6 +14,15 @@
       padding: $mobile-section-spacing;
     }
   }
+
+  &__shelf {
+    width: 62.5%;
+  }
+
+  &__cart {
+    width: 37.5%;
+  }
+
   &__button {
     border-radius: $radius-small;
     color: $main-color;

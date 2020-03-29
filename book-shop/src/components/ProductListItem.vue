@@ -4,14 +4,14 @@
     <div :class="`${$options.name}__info`">
       <span :class="`${$options.name}__title`">{{ book.title }}</span>
       <span :class="`${$options.name}__price`">
-        <span :class="`${$options.name}__priceSymbol`">฿</span>
-        <span>{{ book.price }}</span>
+        <span>{{ normalizeCurrency(book.price) }}</span>
       </span>
     </div>
   </div>
 </template>
 
 <script>
+import normalizer from '@/utils/normalizer';
 export default {
   name: 'ProductListItem',
   props: {
@@ -22,6 +22,9 @@ export default {
   methods: {
     onClick(book) {
       this.$store.dispatch('carts/addBookToCart', book)
+    },
+    normalizeCurrency(money) {
+      return normalizer.THBCurrency(money);
     }
   }
 }

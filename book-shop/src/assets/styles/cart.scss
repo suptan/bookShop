@@ -2,9 +2,15 @@
 @import '@/assets/variable.scss';
 
 .Cart {
-  margin: $section-spacing;
-  background-color: $component-bg-color;
-  border-radius: $radius-small;
+  position: fixed;
+  top: 114px;
+  width: inherit;
+
+  &__container {
+    margin: 0 $section-spacing;
+    border-radius: $radius-small;
+    background-color: $component-bg-color;
+  }
 
   @include mobile {
     margin: 1em;
@@ -12,9 +18,28 @@
 
   &__content {
     display: flex;
+    flex-direction: column;
   }
 
   &__row {
     display: flex;
+    width: 100%;
+
+    > div {
+      -ms-word-break: break-all;
+      word-break: break-all;
+      word-break: break-word;
+      width: 33.33%;
+      padding: $space-small;
+    }
+  }
+
+  &__breakdown {
+    flex-direction: column;
+
+    > div {
+      width: 100%;
+    //   justify-content: space-between;
+    }
   }
 }

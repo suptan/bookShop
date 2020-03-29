@@ -3,10 +3,10 @@
     <div :class="`${$options.name}`">
       <div :class="`${$options.name}__content`">
         <div :class="`${$options.name}__shelf`">
-          <div :class="`${$options.name}__title`"><h1>Shelf</h1></div>
+          <!-- <div :class="`${$options.name}__title`"><h1>Shelf</h1></div> -->
           <product-list :books="books"/>
         </div>
-        <cart />
+        <div :class="`${$options.name}__cart`"><cart /></div>
       </div>
       <button date-qe="submit" v-on:click="navigate()" :class="`${$options.name}__button`">Go</button>
       <div v-for="book in books" :key="book.id">

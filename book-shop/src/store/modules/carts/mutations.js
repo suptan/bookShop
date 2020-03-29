@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 /**
  *
  * @param {import(".").CartState} state
@@ -14,7 +16,7 @@ const ADD_TO_CART = (state, book) => {
   if (index === -1) {
     state.cart.item.books.push(item);
   } else {
-    state.cart.item.books[index] = item;
+    Vue.set(state.cart.item.books, index, item);
   }
 
   state.cart.total += price;
