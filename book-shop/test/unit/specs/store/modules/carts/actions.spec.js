@@ -64,7 +64,6 @@ describe('carts/actions', () => {
     it('should commit correct mutation', () => {
       actions.clearCart({ commit: mockCommit });
       expect(mockCommit).toHaveBeenCalledWith('CLEAR_CART');
-      expect(mockCommit).toHaveBeenCalledWith('CALCULATE_DISCOUNT');
     });
   });
 });
