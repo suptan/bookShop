@@ -38,6 +38,13 @@
     }
   }
 
+  &__thead {
+    // color: $text-sub-color;
+    // background-color: $table-back;
+    font-style: italic;
+    border-bottom: 1px solid $border-line-section-color;
+  }
+
   &__quantity {
     display: flex;
     justify-content: center;
@@ -50,10 +57,24 @@
 
   &__breakdown {
     flex-direction: column;
+    // color: $text-sub-color;
+    // background-color: $table-back;
+    font-style: italic;
+    border-top: 1px solid $border-line-section-color;
 
     > div {
       width: 100%;
     //   justify-content: space-between;
     }
+  }
+
+  &__footer {
+    background-color: $main-color;
+    color: $text-sub-color;
+    height: $main-button-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 $space-small $space-small;
   }
 }

@@ -3,7 +3,7 @@
     <div :class="`${$options.name}__container`">
       <div :class="`${$options.name}__header`"><h1>Cart</h1></div>
       <div :class="`${$options.name}__content`">
-        <div :class="`${$options.name}__row`">
+        <div :class="[`${$options.name}__row`, `${$options.name}__thead`]">
             <div></div>
             <div>Name</div>
             <div>QTY</div>
@@ -45,7 +45,7 @@
       </div>
       <div
         :class="`${$options.name}__footer`"
-        @click="onClickDecrease(book.id)"
+        @click="navigate()"
       >Pay ({{ normalizeCurrency(cart.total) }})</div>
     </div>
   </div>
