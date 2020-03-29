@@ -5,6 +5,9 @@
       <div :class="`${$options.name}__container`">
         <cash-payment />
       </div>
+      <div :class="`${$options.name}__back`" @click="navigate()">
+        <img src="../assets/icons/back.png" alt="back">
+      </div>
     </div>
   </layout-default>
 </template>
@@ -28,6 +31,11 @@ export default {
       // item: 'carts/item'
     }),
   },
+  methods: {
+    navigate() {
+      router.push({ name: 'HomeView' })
+    }
+  }
 }
 </script>
 

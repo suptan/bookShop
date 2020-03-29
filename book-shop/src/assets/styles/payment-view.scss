@@ -10,4 +10,15 @@
     border: 1px solid $border-line-section-color;
     border-radius: $radius-small;
   }
+
+  &__back {
+    position: absolute;
+    top: 78px;
+    left: 24px;
+    cursor: pointer;
+
+    > img {
+      height: 30px;
+    }
+  }
 }
