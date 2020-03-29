@@ -14,7 +14,7 @@ const addBookToCart = ({ commit }, book) => {
 /**
  *
  * @param {Function} param0.commit
- * @param {number} id
+ * @param {string} id
  */
 const removeBookFromCart = ({ commit }, id) => {
   logger.debug('Remove book from cart');
@@ -22,22 +22,35 @@ const removeBookFromCart = ({ commit }, id) => {
   commit('CALCULATE_DISCOUNT');
 };
 
+/**
+ *
+ * @param {Function} param0.commit
+ * @param {string} id
+ */
 const decreaseBookInCart = ({ commit }, id) => {
   logger.debug('Decrease book in cart');
   commit('DECREASE_BOOK_IN_CART', id);
   commit('CALCULATE_DISCOUNT');
 };
 
+/**
+ *
+ * @param {Function} param0.commit
+ * @param {string} id
+ */
 const increaseBookInCart = ({ commit }, id) => {
   logger.debug('Increase book in cart');
   commit('INCREASE_BOOK_IN_CART', id);
   commit('CALCULATE_DISCOUNT');
 };
 
+/**
+ *
+ * @param {Function} param0.commit
+ */
 const clearCart = ({ commit }) => {
   logger.debug('Clear items in cart');
   commit('CLEAR_CART');
-  commit('CALCULATE_DISCOUNT');
 };
 
 export default {

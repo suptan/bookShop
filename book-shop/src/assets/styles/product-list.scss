@@ -7,6 +7,7 @@
   margin: $section-spacing;
   background-color: $component-bg-color;
   border-radius: $radius-small;
+  border: 1px solid $component-bg-color;
 
   @include mobile {
     margin: 1em;

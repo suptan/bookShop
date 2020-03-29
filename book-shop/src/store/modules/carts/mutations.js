@@ -1,5 +1,7 @@
 import Vue from 'vue';
+import get from 'lodash.get';
 import { HARRY_DISCOUNT } from '@/utils/constant';
+import logger from '@/utils/logger';
 
 /**
  *
@@ -8,8 +10,8 @@ import { HARRY_DISCOUNT } from '@/utils/constant';
  */
 const ADD_TO_CART = (state, book) => {
   const index = state.cart.item.books.map(b => b.id).indexOf(book.id);
-  const price = +book.price;
-  const item = index > -1 ? state.cart.item.books[index] : book;
+  const item = index > -1 ? state.cart.item.books[index] : { ...book };
+  const price = item.price;
 
   item.amount = item.amount + 1 || 1;
   item.total = item.total + price || price;
@@ -29,15 +31,19 @@ const ADD_TO_CART = (state, book) => {
 /**
  *
  * @param {import(".").CartState} state
- * @param {number} id
+ * @param {string} id
  */
 const REMOVE_FROM_CART = (state, id) => {
   const index = state.cart.item.books.map(b => b.id).indexOf(id);
 
   if (index < 0) return;
+  logger.debug('Found book to remove from cart');
 
   const removeItem = state.cart.item.books.splice(index, 1)[0];
-  state.cart.discount.books.harry.delete(removeItem.id);
+
+  if (typeof get(state, ['cart', 'discount', 'books', 'harry']) === 'object') {
+    state.cart.discount.books.harry.delete(removeItem.id);
+  }
 
   state.cart.subTotal -= removeItem.total;
 };
@@ -45,7 +51,7 @@ const REMOVE_FROM_CART = (state, id) => {
 /**
  *
  * @param {import(".").CartState} state
- * @param {number} id
+ * @param {string} id
  */
 const DECREASE_BOOK_IN_CART = (state, id) => {
   const index = state.cart.item.books.map(b => b.id).indexOf(id);
@@ -54,15 +60,15 @@ const DECREASE_BOOK_IN_CART = (state, id) => {
   if (!book || book.amount < 1) return;
 
   book.amount -= 1;
-  book.total -= +book.price;
+  book.total -= book.price;
   Vue.set(state.cart.item.books, index, book);
-  state.cart.subTotal -= +book.price;
+  state.cart.subTotal -= book.price;
 };
 
 /**
  *
  * @param {import(".").CartState} state
- * @param {number} id
+ * @param {string} id
  */
 const INCREASE_BOOK_IN_CART = (state, id) => {
   const index = state.cart.item.books.map(b => b.id).indexOf(id);
@@ -71,9 +77,9 @@ const INCREASE_BOOK_IN_CART = (state, id) => {
   if (!book) return;
 
   book.amount += 1;
-  book.total += +book.price;
+  book.total += book.price;
   Vue.set(state.cart.item.books, index, book);
-  state.cart.subTotal += +book.price;
+  state.cart.subTotal += book.price;
 };
 
 /**

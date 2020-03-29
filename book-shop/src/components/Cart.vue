@@ -4,7 +4,7 @@
       <div :class="`${$options.name}__header`"><h1>Cart</h1></div>
       <div :class="`${$options.name}__content`">
         <div :class="[`${$options.name}__row`, `${$options.name}__thead`]">
-            <div></div>
+            <div @click="onClickRemoveAll()"><img src="../assets/icons/delete.png" alt="delete"></div>
             <div>Name</div>
             <div>QTY</div>
             <div>Price</div>
@@ -13,33 +13,39 @@
             <div @click="onClickRemove(book.id)">
               <img src="../assets/icons/delete.png" alt="delete">
             </div>
-            <div>{{ book.title }}</div>
+            <div :class="`${$options.name}__label`">{{ book.title }}</div>
             <div>
               <div :class="`${$options.name}__quantity`">
                 <span @click="onClickDecrease(book.id)">
                   <img src="../assets/icons/minus.png" alt="minus">
                 </span>
-                <span>{{ book.amount }}</span>
+                <span :class="`${$options.name}__quantity__label`">{{ book.amount }}</span>
                 <span @click="onClickIncrese(book.id)">
                   <img src="../assets/icons/plus.png" alt="plus">
                 </span>
               </div>
             </div>
-            <div>{{ normalizeCurrency(book.total) }}</div>
+            <div :class="`${$options.name}__price`">
+            <span>{{ normalizeCurrency(book.total) }}</span>
+            </div>
         </div>
-        <div v-if="!item.books || item.books.length === 0">Cart Empty</div>
+        <div :class="`${$options.name}__empty`" v-if="!item.books || item.books.length === 0">CART IS EMPTY</div>
         <div :class="[`${$options.name}__breakdown`]">
             <div :class="`${$options.name}__row`">
               <div></div>
-              <div>Discount</div>
+              <div :class="`${$options.name}__label`">Discount</div>
               <div></div>
-              <div>{{ normalizeCurrency(cart.discount.amount) }}</div>
+              <div :class="`${$options.name}__price`">
+                <span>{{ normalizeCurrency(cart.discount.amount) }}</span>
+              </div>
             </div>
             <div :class="`${$options.name}__row`">
               <div></div>
-              <div>Sub Total</div>
+              <div :class="`${$options.name}__label`">Sub Total</div>
               <div></div>
-              <div>{{ normalizeCurrency(cart.subTotal) }}</div>
+              <div :class="`${$options.name}__price`">
+                <span>{{ normalizeCurrency(cart.subTotal) }}</span>
+              </div>
             </div>
         </div>
       </div>
@@ -75,7 +81,12 @@ export default {
       this.$store.dispatch('carts/increaseBookInCart', id);
     },
     onClickRemove(id) {
-      this.$store.dispatch('carts/removeBookFromCart', id);
+      this.$dialog.confirm('Do you want to remove this product?')
+        .then(() => this.$store.dispatch('carts/removeBookFromCart', id))
+    },
+    onClickRemoveAll() {
+      this.$dialog.confirm('Do you want to empty the cart?')
+        .then(() => this.$store.dispatch('carts/clearCart'))
     },
     normalizeCurrency(money) {
       return normalizer.THBCurrency(money);

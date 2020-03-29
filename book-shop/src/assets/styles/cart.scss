@@ -14,6 +14,16 @@
     margin: 0 $section-spacing;
     border-radius: $radius-small;
     background-color: $component-bg-color;
+    border: 1px solid $component-border-color;
+  }
+
+  &__header {
+    padding: $space-medium;
+
+    > h1 {
+      font-size: 24px;
+      font-weight: normal;
+    }
   }
 
   &__content {
@@ -39,10 +49,10 @@
   }
 
   &__thead {
-    // color: $text-sub-color;
-    // background-color: $table-back;
     font-style: italic;
+    border-top: 1px solid $border-line-section-color;
     border-bottom: 1px solid $border-line-section-color;
+    font-weight: bold;
   }
 
   &__quantity {
@@ -53,19 +63,25 @@
     & > span {
       padding: 0 $space-small;
     }
+
+    &__label {
+      width: 20px;
+    }
   }
 
   &__breakdown {
     flex-direction: column;
-    // color: $text-sub-color;
-    // background-color: $table-back;
-    font-style: italic;
     border-top: 1px solid $border-line-section-color;
+    font-style: italic;
+    padding: $space-small;
 
     > div {
       width: 100%;
-    //   justify-content: space-between;
     }
+  }
+
+  &__empty {
+    padding: $space-large;
   }
 
   &__footer {
@@ -76,5 +92,17 @@
     justify-content: center;
     align-items: center;
     border-radius: 0 0 $space-small $space-small;
+  }
+
+  &__label {
+    text-align: left;
+  }
+
+  &__price {
+    text-align: right;
+
+    & > span {
+      padding-right: $space-large;
+    }
   }
 }

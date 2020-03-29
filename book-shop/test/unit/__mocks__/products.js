@@ -1,11 +1,11 @@
 const mockBooks = [{
   cover: 'pic1',
-  price: '111',
+  price: 111,
   title: 'foo',
   id: '330',
 }, {
   cover: 'pic2',
-  price: '123',
+  price: 123,
   title: 'bar',
   id: '431',
 }];
