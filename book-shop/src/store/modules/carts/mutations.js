@@ -4,8 +4,20 @@
  * @param {import("../products").Book} book
  */
 const ADD_TO_CART = (state, book) => {
-  state.cart.item.books.push(book);
-  state.cart.total += +book.price;
+  const index = state.cart.item.books.map(b => b.id).indexOf(book.id);
+  const price = +book.price;
+  const item = index > -1 ? state.cart.item.books[index] : book;
+
+  item.amount = item.amount + 1 || 1;
+  item.total = item.total + price || price;
+
+  if (index === -1) {
+    state.cart.item.books.push(item);
+  } else {
+    state.cart.item.books[index] = item;
+  }
+
+  state.cart.total += price;
 };
 
 /**

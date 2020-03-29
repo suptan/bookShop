@@ -7,7 +7,13 @@
         <div>QTY</div>
         <div>Price</div>
       </div>
+      <div :class="`${$options.name}__row`" v-for="book in item.books" :key="book.id">
+        <div>{{ book.title }}</div>
+        <div>{{ book.amount }}</div>
+        <div>{{ book.total }}</div>
+      </div>
     </div>
+    {{cart}}
   </div>
 </template>
 
@@ -18,11 +24,14 @@ export default {
   name: 'Cart',
   computed: {
     ...mapGetters({
-      books: 'products/books',
+      cart: 'carts/cart',
+      item: 'carts/item'
     }),
   },
-  mounted() {
-    this.$store.dispatch('products/getBooks');
+  methods: {
+    getItems() {
+      this.$store.dispatch()
+    }
   },
 }
 </script>
