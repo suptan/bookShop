@@ -1,0 +1,87 @@
+@import '@/assets/responsive.scss';
+@import '@/assets/variable.scss';
+
+.CashPayment {
+  padding: 20px 12px;
+  background-color: $component-bg-color;
+  border-radius: $radius-small;
+
+  &__container {
+    margin: 0 auto;
+    width: 300px;
+    border: 1px solid $border-line-section-color;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    & > div {
+      display: flex;
+      align-items: center;
+
+      & > span {
+        padding: 3px;
+      }
+    }
+  }
+
+  &__icon {
+    height: 20px;
+    width: 20px;
+  }
+
+  &__cash {
+    border: 1px solid $pink-swan;
+    border-radius: 18px;
+    margin: $space-medium 0;
+
+    &__area {
+      display: flex;
+      padding: 0 $space-large;
+      align-items: center;
+    }
+  }
+
+  &__input {
+    font-size: 30px;
+    width: 240px;
+    text-align: right;
+    border: 0;
+
+    >::-webkit-input-placeholder {
+      opacity: 0.2px;
+    }
+  }
+
+  &__macro {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: $space-medium 0;
+
+    > div {
+      border: 1px solid $pink-swan;
+      border-radius: 18px;
+      padding: $space-small $space-medium;
+    }
+  }
+
+  &__submit {
+    background-color: $main-color;
+    width: 154px;
+    padding: 0 $space-large;
+    height: $main-button-height;
+    color: $text-sub-color;
+    border-radius: $main-button-border-radius;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  &__footer {
+    padding: $space-medium 0;
+  }
+}

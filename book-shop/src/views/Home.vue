@@ -44,11 +44,6 @@ export default {
   mounted() {
     this.$store.dispatch('products/getBooks');
   },
-  methods: {
-      navigate() {
-          router.push({ name: 'Page2View' });
-      },
-  }
 }
 </script>
 

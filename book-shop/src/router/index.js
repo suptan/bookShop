@@ -14,9 +14,9 @@ const routes = [{
   name: 'HomeView',
   component: () => import(/* webpackPrefetch: true */'@/views/Home'),
 }, {
-  path: '/page',
-  name: 'Page2View',
-  component: () => import(/* webpackPrefetch: true */'@/views/Page2'),
+  path: '/payment',
+  name: 'PaymentView',
+  component: () => import(/* webpackPrefetch: true */'@/views/Payment'),
 }];
 
 export default new Router({

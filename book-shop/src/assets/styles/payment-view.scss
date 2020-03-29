@@ -1,0 +1,13 @@
+@import '@/assets/responsive.scss';
+@import '@/assets/variable.scss';
+
+.PaymentView {
+  padding-top: 20px;
+
+  &__container {
+    margin: 0 auto;
+    width: 300px;
+    border: 1px solid $border-line-section-color;
+    border-radius: $radius-small;
+  }
+}
