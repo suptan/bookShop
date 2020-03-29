@@ -1,7 +1,9 @@
 <template>
   <div :class="`${$options.name}`">
     <div :class="`${$options.name}__container`">
-      <div :class="`${$options.name}__header`"><h1>Cart</h1></div>
+      <div :class="`${$options.name}__header`">
+        <h1>Cart</h1>
+      </div>
       <div :class="`${$options.name}__content`">
         <div :class="[`${$options.name}__row`, `${$options.name}__thead`]">
             <div @click="onClickRemoveAll()" :class="'cursor-pointer'"><img src="../assets/icons/delete.png" alt="delete"></div>
@@ -9,25 +11,27 @@
             <div>QTY</div>
             <div>Price</div>
         </div>
-        <div :class="`${$options.name}__row`" v-for="book in item.books" :key="book.id">
-            <div @click="onClickRemove(book.id)" :class="'cursor-pointer'">
-              <img src="../assets/icons/delete.png" alt="delete">
-            </div>
-            <div :class="`${$options.name}__label`">{{ book.title }}</div>
-            <div>
-              <div :class="`${$options.name}__quantity`">
-                <span @click="onClickDecrease(book.id)">
-                  <img src="../assets/icons/minus.png" alt="minus">
-                </span>
-                <span :class="`${$options.name}__quantity__label`">{{ book.amount }}</span>
-                <span @click="onClickIncrese(book.id)">
-                  <img src="../assets/icons/plus.png" alt="plus">
-                </span>
+        <div :class="[`${$options.name}__list`]">
+          <div :class="[`${$options.name}__row`]" v-for="book in item.books" :key="book.id">
+              <div @click="onClickRemove(book.id)" :class="'cursor-pointer'">
+                <img src="../assets/icons/delete.png" alt="delete">
               </div>
-            </div>
-            <div :class="`${$options.name}__price`">
-            <span>{{ normalizeCurrency(book.total) }}</span>
-            </div>
+              <div :class="`${$options.name}__label`">{{ book.title }}</div>
+              <div>
+                <div :class="`${$options.name}__quantity`">
+                  <span @click="onClickDecrease(book.id)">
+                    <img src="../assets/icons/minus.png" alt="minus">
+                  </span>
+                  <span :class="`${$options.name}__quantity__label`">{{ book.amount }}</span>
+                  <span @click="onClickIncrese(book.id)">
+                    <img src="../assets/icons/plus.png" alt="plus">
+                  </span>
+                </div>
+              </div>
+              <div :class="`${$options.name}__price`">
+                <span>{{ normalizeCurrency(book.total) }}</span>
+              </div>
+          </div>
         </div>
         <div :class="`${$options.name}__empty`" v-if="!item.books || item.books.length === 0">CART IS EMPTY</div>
         <div :class="[`${$options.name}__breakdown`]">

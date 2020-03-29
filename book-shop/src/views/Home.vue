@@ -7,7 +7,12 @@
           <product-list />
         </div>
         <div :class="`${$options.name}__cart`"><cart /></div>
+        <div :class="`${$options.name}__cart__mobile`" v-show="isShow">
+          <span :class="`${$options.name}__header__close`" @click="isShow = false">X</span>
+          <cart />
+        </div>
       </div>
+      <div :class="`${$options.name}__basket`" @click="isShow = true">Basket</div>
     </div>
   </layout-default>
 </template>
@@ -25,6 +30,11 @@ export default {
     LayoutDefault,
     ProductList,
     Cart,
+  },
+  data() {
+    return {
+      isShow: false,
+    };
   },
   computed: {
     ...mapGetters({

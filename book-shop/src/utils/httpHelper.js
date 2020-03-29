@@ -80,6 +80,18 @@ async function getRequest({ path }) {
           title: 'Harry Potter and the Order of the Phoenix (V)',
           id: '9781408855690',
         },
+        {
+          cover: 'https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/5098/9781509809950.jpg',
+          price: +'160',
+          title: 'Solve For Happy',
+          id: '9781509809950',
+        },
+        {
+          cover: 'https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/mid/9781/4736/9781473634176.jpg',
+          price: +'345',
+          title: 'The Confidence Project',
+          id: '9781473634176',
+        },
       ]);
     }, 500);
   });

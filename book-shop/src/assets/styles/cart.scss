@@ -5,9 +5,11 @@
   position: fixed;
   top: 114px;
   width: inherit;
+  z-index: 1000;
 
   @include mobile {
-    margin: 1em;
+    margin: 0;
+    top: 0;
   }
 
   &__container {
@@ -15,14 +17,30 @@
     border-radius: $radius-small;
     background-color: $component-bg-color;
     border: 1px solid $component-border-color;
+
+    @include mobile {
+      margin: 0;
+    }
   }
 
   &__header {
     padding: $space-medium;
+    position: relative;
 
     > h1 {
       font-size: 24px;
       font-weight: normal;
+    }
+
+    &__close {
+      display: none;
+
+      @include mobile {
+        display: block;
+        position: absolute;
+        top: 6px;
+        right: 6px;
+      }
     }
   }
 
@@ -53,6 +71,17 @@
     border-top: 1px solid $border-line-section-color;
     border-bottom: 1px solid $border-line-section-color;
     font-weight: bold;
+  }
+
+  &__list {
+    height: 30vh;
+    max-height: 30vh;
+    overflow: auto;
+
+    @include mobile {
+      height: 54vh;
+      max-height: 54vh;
+    }
   }
 
   &__quantity {
@@ -104,6 +133,10 @@
 
     & > span {
       padding-right: $space-large;
+
+      @include mobile {
+        padding-right: 0;
+      }
     }
   }
 }
