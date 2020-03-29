@@ -99,7 +99,14 @@ const CLEAR_CART = (state) => {
     item: {
       books: [],
     },
+    subTotal: 0,
     total: 0,
+    discount: {
+      books: {
+        harry: new Set(),
+      },
+      amount: 0,
+    },
   };
 };
 
