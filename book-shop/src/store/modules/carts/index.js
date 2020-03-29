@@ -14,7 +14,18 @@ import mutations from './mutations';
 /**
  * @typedef {Object} Cart
  * @property {CartItem} item
+ * @property {number} subTotal
  * @property {number} total
+ * @property {Discount} discount
+ */
+/**
+ * @typedef {Object} Discount
+ * @property {DiscountBooks} books
+ * @property {number} amount
+ */
+/**
+ * @typedef {Object} DiscountBooks
+ * @property {Set<string>} harry
  */
 /**
  * @typedef {Object} CartState
@@ -28,8 +39,15 @@ const state = {
     item: {
       books: [],
     },
+    subTotal: 0,
     total: 0,
-    discount: 0,
+    discount: {
+      books: {
+        harry: new Set(),
+      },
+      amount: 0,
+    },
+
   },
 };
 
