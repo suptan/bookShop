@@ -10,15 +10,22 @@
     <div>
       <div :class="`${$options.name}__cash`">
         <div :class="`${$options.name}__cash__area`">
-          <span><input type="number" placeholder="0" :class="`${$options.name}__input`"></span>
+          <span>
+            <input
+              type="number"
+              placeholder="0"
+              :class="`${$options.name}__input`"
+              v-model="txtInput"
+            >
+          </span>
         </div>
       </div>
       <div :class="`${$options.name}__macro`">
-        <div>{{ roundUp(cart.total) }}</div>
-        <div>Exact</div>
+        <div :class="'cursor-pointer'" @click="onClickHundredUp(cart.total)">{{ roundUp(cart.total) }}</div>
+        <div :class="'cursor-pointer'" @click="onClickExact(cart.total)">Exact</div>
       </div>
       <div :class="`${$options.name}__footer`">
-        <div :class="`${$options.name}__submit`">Pay Now</div>
+        <div :class="[`${$options.name}__submit`, 'cursor-pointer']" @click="onPayNow">Pay Now</div>
       </div>
     </div>
   </div>
@@ -27,21 +34,62 @@
 <script>
 import { mapGetters } from 'vuex';
 import normalizer from '@/utils/normalizer';
+import router from '@/router'
+import store from '@/store';
+
+const baseTemplate = '<div><b>Sale complete</b></div>';
+const changeTemplate = '<div>Change: $0</div>';
 
 export default {
   name: 'CashPayment',
+  data() {
+    return {
+      txtInput: undefined,
+    };
+  },
   computed: {
     ...mapGetters({
       cart: 'carts/cart',
     }),
   },
   methods: {
+    onClickHundredUp(money) {
+      const { total } = this.cart;
+      const change = this.roundUp(money) - total;
+      const message = baseTemplate + changeTemplate.replace('$0', normalizer.THBCurrency(change));
+      this.paymentSuccess(message);
+    },
+    onClickExact() {
+      this.paymentSuccess(baseTemplate);
+    },
+    onPayNow() {
+      const { total } = this.cart;
+      const change = this.roundUp(this.txtInput) - total;
+
+      if (change < 0) {
+        this.$dialog.alert('Please fill in the correct amount', { html: true, okText: 'OK' })
+      } else {
+        const displayChange = change > 0
+          ? changeTemplate.replace('$0', normalizer.THBCurrency(change))
+          : ''
+        const message = baseTemplate + displayChange;
+        this.paymentSuccess(message);
+      }
+    },
     roundUp(money) {
+      if (!money) return -1;
       return Math.ceil(Math.ceil(money/10)/10) * 100;
     },
     normalizeCurrency(money) {
       return normalizer.THBCurrency(money);
     },
+    paymentSuccess(message) {
+      this.$dialog.alert(message, { html: true, okText: 'OK' })
+        .then(() => {
+          store.dispatch('carts/clearCart');
+          router.push({ name: 'HomeView' });
+        })
+    }
   },
 }
 </script>

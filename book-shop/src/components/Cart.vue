@@ -32,8 +32,8 @@
                 <span>{{ normalizeCurrency(book.total) }}</span>
               </div>
           </div>
+          <div :class="`${$options.name}__empty`" v-if="!item.books || item.books.length === 0">CART IS EMPTY</div>
         </div>
-        <div :class="`${$options.name}__empty`" v-if="!item.books || item.books.length === 0">CART IS EMPTY</div>
         <div :class="[`${$options.name}__breakdown`]">
             <div :class="`${$options.name}__row`">
               <div></div>
@@ -94,7 +94,7 @@ export default {
     },
     navigate(total) {
       if (total > 0) {
-        router.push({ name: 'Page2View' });
+        router.push({ name: 'PaymentView' });
       }
     }
   },
