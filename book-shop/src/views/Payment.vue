@@ -28,7 +28,6 @@ export default {
   computed: {
     ...mapGetters({
       cart: 'carts/cart',
-      // item: 'carts/item'
     }),
   },
   methods: {
