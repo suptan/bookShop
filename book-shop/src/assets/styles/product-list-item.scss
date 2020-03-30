@@ -8,6 +8,11 @@
   padding: $space-medium;
   cursor: pointer;
 
+  &:hover {
+    border-bottom: 2px solid $main-color;
+    color: $main-color;
+  }
+
   @include mobile {
     min-width: auto;
   }
