@@ -23,7 +23,7 @@
                     <img src="../assets/icons/minus.png" alt="minus">
                   </span>
                   <span :class="`${$options.name}__quantity__label`">{{ book.amount }}</span>
-                  <span @click="onClickIncrese(book.id)">
+                  <span @click="onClickIncrease(book.id)">
                     <img src="../assets/icons/plus.png" alt="plus">
                   </span>
                 </div>
@@ -75,13 +75,10 @@ export default {
     }),
   },
   methods: {
-    getItems() {
-      this.$store.dispatch()
-    },
     onClickDecrease(id) {
       this.$store.dispatch('carts/decreaseBookInCart', id);
     },
-    onClickIncrese(id) {
+    onClickIncrease(id) {
       this.$store.dispatch('carts/increaseBookInCart', id);
     },
     onClickRemove(id) {

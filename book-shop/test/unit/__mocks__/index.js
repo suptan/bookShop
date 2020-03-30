@@ -7,7 +7,6 @@ Vue.use(Vuex);
 
 export function createStoreMocks(args = {}) {
   const { carts, products } = args;
-  // console.log(products);
 
   return {
     store: new Vuex.Store({
