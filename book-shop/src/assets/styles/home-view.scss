@@ -1,5 +1,84 @@
+@import '@/assets/responsive.scss';
 @import '@/assets/variable.scss';
+
 .HomeView {
+
+  &__content {
+    display: flex;
+
+    @include mobile {
+      flex-direction: column;
+    }
+  }
+
+  &__title {
+    padding: $section-spacing;
+
+    @include mobile {
+      padding: $mobile-section-spacing;
+    }
+  }
+
+  &__shelf {
+    width: 62.5%;
+
+    @include mobile {
+      width: 100%;
+      padding-bottom: 30px;
+    }
+  }
+
+  &__cart {
+    width: 37.5%;
+
+    @include mobile {
+      // width: 100%;
+      display: none;
+    }
+
+    &__mobile {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      > span {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        z-index: 1001;
+      }
+
+      &-enter, &-leave-to {
+        visibility: hidden;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        opacity: 0;
+      }
+
+      &-enter-active, &-leave-active {
+        transition: all 0.3s;
+      }
+    }
+  }
+
+  &__basket {
+    display: none;
+
+    @include mobile {
+      position: fixed;
+      bottom: 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: $main-button-height;
+      background-color: $main-color;
+      color: $text-sub-color;
+    }
+  }
+
   &__button {
     border-radius: $radius-small;
     color: $main-color;

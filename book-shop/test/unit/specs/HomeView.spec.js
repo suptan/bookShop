@@ -2,7 +2,8 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import HomeView from '@/views/Home';
 import router from '@/router';
-import { createStoreMocks, mockBooks } from '../__mocks__';
+import { createStoreMocks } from '../__mocks__';
+import { mockBooks } from '../__mocks__/products';
 
 jest.mock('@/router', () => ({
   push: jest.fn(),

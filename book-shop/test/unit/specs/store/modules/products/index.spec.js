@@ -5,7 +5,8 @@ describe('products', () => {
     expect(productsModule).toEqual(
       expect.objectContaining({
         namespaced: true,
-        state: { books: [] },
+        state: { books: [], displayBooks: [] },
+
       }),
     );
   });

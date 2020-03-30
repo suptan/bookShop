@@ -1,0 +1,28 @@
+@import '@/assets/responsive.scss';
+@import '@/assets/variable.scss';
+
+.LayoutDefault {
+  height: 100vh;
+  &__nav {
+    color: #fff;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-bottom: 1px solid $component-border-color;
+
+    @include mobile {
+      height: 56px;
+    }
+  }
+
+  &__main {
+    background-color: $main-bg-color;
+    min-height: calc(100vh - 65px);
+
+    @include mobile {
+      min-height: calc(100vh - 56px);
+    }
+  }
+}

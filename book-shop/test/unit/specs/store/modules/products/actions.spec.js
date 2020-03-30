@@ -3,6 +3,7 @@ import actions from '@/store/modules/products/actions';
 import logger from '@/utils/logger';
 
 jest.mock('@/utils/logger', () => ({
+  debug: jest.fn(),
   error: jest.fn(),
 }));
 
@@ -17,6 +18,10 @@ describe('products/actions', () => {
       expect(mockCommit).toHaveBeenCalledWith(
         'BOOKS_UPDATED',
         mockData,
+      );
+      expect(mockCommit).toHaveBeenCalledWith(
+        'FILTER_BOOKS',
+        '',
       );
     });
     it('should log error when can\'t fetch data', async () => {

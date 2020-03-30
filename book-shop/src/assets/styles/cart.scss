@@ -1,0 +1,142 @@
+@import '@/assets/responsive.scss';
+@import '@/assets/variable.scss';
+
+.Cart {
+  position: fixed;
+  top: 114px;
+  width: inherit;
+  z-index: 1000;
+
+  @include mobile {
+    margin: 0;
+    top: 0;
+  }
+
+  &__container {
+    margin: 0 $section-spacing;
+    border-radius: $radius-small;
+    background-color: $component-bg-color;
+    border: 1px solid $component-border-color;
+
+    @include mobile {
+      margin: 0;
+    }
+  }
+
+  &__header {
+    padding: $space-medium;
+    position: relative;
+
+    > h1 {
+      font-size: 24px;
+      font-weight: normal;
+    }
+
+    &__close {
+      display: none;
+
+      @include mobile {
+        display: block;
+        position: absolute;
+        top: 6px;
+        right: 6px;
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__row {
+    display: flex;
+    width: 100%;
+
+    > div {
+      -ms-word-break: break-all;
+      word-break: break-all;
+      word-break: break-word;
+      width: 32%;
+      padding: $space-small;
+
+      &:first-child {
+        width: 4%;
+      }
+    }
+  }
+
+  &__thead {
+    font-style: italic;
+    border-top: 1px solid $border-line-section-color;
+    border-bottom: 1px solid $border-line-section-color;
+    font-weight: bold;
+  }
+
+  &__list {
+    height: 30vh;
+    max-height: 30vh;
+    overflow: auto;
+
+    @include mobile {
+      height: 54vh;
+      max-height: 54vh;
+    }
+  }
+
+  &__quantity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > span {
+      padding: 0 $space-small;
+    }
+
+    &__label {
+      width: 20px;
+    }
+  }
+
+  &__breakdown {
+    flex-direction: column;
+    border-top: 1px solid $border-line-section-color;
+    font-style: italic;
+    padding: $space-small;
+
+    > div {
+      width: 100%;
+    }
+  }
+
+  &__empty {
+    padding: $space-large;
+  }
+
+  &__footer {
+    background-color: $main-color;
+    color: $text-sub-color;
+    height: $main-button-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 $space-small $space-small;
+    cursor: pointer;
+  }
+
+  &__label {
+    text-align: left;
+  }
+
+  &__price {
+    text-align: right;
+
+    & > span {
+      padding-right: $space-large;
+
+      @include mobile {
+        padding-right: 0;
+      }
+    }
+  }
+}

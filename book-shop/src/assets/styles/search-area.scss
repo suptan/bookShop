@@ -1,0 +1,26 @@
+@import '@/assets/responsive.scss';
+@import '@/assets/variable.scss';
+
+.SearchArea {
+  display: flex;
+  align-items: center;
+  height: 33px;
+  border-radius: 18px;
+  border: 1px solid $pink-swan;
+
+  &__content {
+    margin: $space-medium;
+  }
+
+  &__inputBox {
+    > input {
+      border: 0;
+      font-size: 14px;
+    }
+  }
+
+  &__icon {
+    height: 12px;
+    width: 12px;
+  }
+}
