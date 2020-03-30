@@ -38,7 +38,7 @@ import router from '@/router'
 import store from '@/store';
 
 const baseTemplate = '<div><b>Sale complete</b></div>';
-const changeTemplate = '<div>Change: $0</div>';
+const changeTemplate = '<br><div>Change: $0</div>';
 
 export default {
   name: 'CashPayment',
@@ -55,7 +55,8 @@ export default {
   methods: {
     onClickHundredUp(money) {
       const { total } = this.cart;
-      const change = this.roundUp(money) - total;
+      const recieved = this.roundUp(money);
+      const change = recieved - total;
       const message = baseTemplate + changeTemplate.replace('$0', normalizer.THBCurrency(change));
       this.paymentSuccess(message);
     },
