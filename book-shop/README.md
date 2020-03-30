@@ -2,6 +2,45 @@
 
 > my vue project for book shop
 
+## Table of contents
+[Project structure](#project-structure)
+
+[Prerequisites](#prerequisites)
+
+[Build Setup](#build-setup)
+
+[Configuration](#configuration)
+
+## Project Structure
+
+````
+src/
+|- api/ ______________________________ # Gateway to API
+|- assets/ ___________________________ # Application assets
+|    |- icons/
+|    |- styles/ ______________________ # Application Styles
+|- components/ _______________________ # Shareable or Specific Components for view
+|- layouts/ __________________________ # Application Layout
+|- router/ ___________________________ # Application Routes
+|- store/ ____________________________ # Application Storage
+|    |- modules ______________________ # Manage based on namespace module structure
+|       |- carts _____________________ # Represent to state in Vuex in this case is carts
+|          |- actions.js
+|          |- getters.js
+|          |- index.js
+|          |- mutations.js
+|- utils/ ____________________________ # Utilities Functions
+|- views/ ____________________________ # Application Pages
+|- App.vue ___________________________ # Application Entry
+|- config.js _________________________ # Application Configuration
+|- main.js ___________________________ # Application Initialization
+````
+
+## Prerequisites
+Make sure you have installed all of the following prerequisites on your development machine:
+* Git - [Download & Install Git](https://git-scm.com/downloads). OSX and Linux machines typically have this already installed.
+* Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager. If you encounter any problems, you can also use this [GitHub Gist](https://gist.github.com/isaacs/579814) to install Node.js.
+
 ## Build Setup
 
 ``` bash
@@ -19,6 +58,12 @@ npm run build --report
 
 # run unit tests
 npm run unit
+
+# run unit tests in watch mode
+npm run unit:watch
+
+# generate unit test coverage report
+npm run unit:coverage
 
 # run e2e tests
 npm run e2e
