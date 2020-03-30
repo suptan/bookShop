@@ -14,7 +14,7 @@
       </div>
       <div :class="`${$options.name}__basket`" @click="isShow = true">
         <div>
-          <span>Basket</span>
+          <span>Cart</span>
           <span><b>{{ countItems() }}</b> item(s)</span>
         </div>
         <div><b>{{ normalizeCurrency(cart.total) }}</b></div>
