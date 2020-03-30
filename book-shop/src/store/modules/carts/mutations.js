@@ -130,7 +130,11 @@ const CALCULATE_DISCOUNT = (state) => {
 
   const keys = Object.keys(harry);
   const basePrice = keys.reduce((sum, key) => sum + harry[key], 0);
-  const discountAmount = basePrice * (HARRY_DISCOUNT[keys.length - 1] / 100);
+  let discountAmount = 0;
+
+  if (keys.length > 0) {
+    discountAmount = basePrice * (HARRY_DISCOUNT[keys.length - 1] / 100);
+  }
   const total = subTotal - discountAmount;
 
   state.cart.total = total;
