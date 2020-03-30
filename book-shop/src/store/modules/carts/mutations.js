@@ -118,13 +118,16 @@ const CLEAR_CART = (state) => {
 
 /**
  *
- * @param {import('.').Cart} state.cart
+ * @param {import('.').CartState} state.cart
  */
 const CALCULATE_DISCOUNT = (state) => {
   const {
     subTotal,
     discount: { books: { harry } },
   } = state.cart;
+
+  if (!harry || typeof harry !== 'object') return;
+
   const keys = Object.keys(harry);
   const basePrice = keys.reduce((sum, key) => sum + harry[key], 0);
   const discountAmount = basePrice * (HARRY_DISCOUNT[keys.length - 1] / 100);
