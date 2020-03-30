@@ -30,4 +30,9 @@
       padding: $space-small;
     }
   }
+
+  &__spinner {
+    display: flex;
+    justify-content: center;
+  }
 }

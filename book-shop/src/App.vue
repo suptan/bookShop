@@ -19,8 +19,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 @import url('https://fonts.cdnfonts.com/css/volte');
+@import '@/assets/variable.scss';
 html,
 body {
   height: 100vh;
@@ -48,5 +49,18 @@ input[type=text] {
 }
 .cursor-pointer {
   cursor: pointer;
+}
+.spinner {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid $main-color;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>

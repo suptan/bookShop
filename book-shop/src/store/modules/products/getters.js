@@ -12,7 +12,15 @@ const books = state => state.books;
  */
 const displayBooks = state => state.displayBooks;
 
+/**
+ *
+ * @param {import(".").BooksState} state
+ * @returns {boolean}
+ */
+const isFetchBooks = state => state.isFetchBooks;
+
 export default {
   books,
   displayBooks,
+  isFetchBooks,
 };
