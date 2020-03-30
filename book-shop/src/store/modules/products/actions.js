@@ -7,7 +7,7 @@ import logger from '@/utils/logger';
  */
 const getBooks = (context) => {
   context.commit('SET_IS_FETCH_BOOK', true);
-  fetchBooks()
+  return fetchBooks()
     .then((res) => {
       logger.debug('Fetch books success');
       context.commit('SET_IS_FETCH_BOOK', false);

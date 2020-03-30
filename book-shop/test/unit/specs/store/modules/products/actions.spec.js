@@ -24,10 +24,12 @@ describe('products/actions', () => {
         '',
       );
     });
+
     it('should log error when can\'t fetch data', async () => {
       const mockError = { msg: 'some error' };
+      const mockCommit = jest.fn();
       api.fetchBooks = jest.fn(() => Promise.reject(mockError));
-      await actions.getBooks();
+      await actions.getBooks({ commit: mockCommit });
 
       expect(logger.error).toHaveBeenCalledWith(JSON.stringify(mockError));
     });

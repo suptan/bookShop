@@ -47,7 +47,7 @@ describe('Cart.vue', () => {
       it('should be call when click process payment', () => {
         wrapper = shallowMount(Cart, { store, localVue });
         wrapper.vm.navigate(100);
-        expect(router.push).toHaveBeenCalledWith({ name: 'Page2View' });
+        expect(router.push).toHaveBeenCalledWith({ name: 'PaymentView' });
       });
       it('should not be call when click process payment when cart empty', () => {
         wrapper = shallowMount(Cart, { store, localVue });
