@@ -6,10 +6,24 @@ describe('products/mutations', () => {
     const books = [{ foo: 1 }];
     mutations.BOOKS_UPDATED(state, books);
 
-    expect(state).toEqual(
-      expect.objectContaining({
-        books: expect.objectContaining(books),
-      }),
-    );
+    expect(state.books).toEqual(books);
+  });
+  describe('FILTER_BOOKS', () => {
+    it('should not change anything when not send filter', () => {
+      const books = [{ foo: 1 }, { bar: 2 }];
+      const state = { books };
+      mutations.FILTER_BOOKS(state);
+
+      expect(state.displayBooks).toEqual(books);
+    });
+    it('should filter books by given title', () => {
+      const books = [{ title: 'haary' }, { title: 'hary' }, { title: 'hary 3' }];
+      const state = { books };
+      mutations.FILTER_BOOKS(state, 'hary');
+
+      expect(state.displayBooks).toEqual([
+        { title: 'hary' }, { title: 'hary 3' },
+      ]);
+    });
   });
 });
