@@ -24,11 +24,6 @@ export default {
     LayoutDefault,
     CashPayment,
   },
-  computed: {
-    ...mapGetters({
-      cart: 'carts/cart',
-    }),
-  },
   methods: {
     navigate() {
       router.push({ name: 'HomeView' });
