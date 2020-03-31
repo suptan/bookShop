@@ -43,7 +43,6 @@
 <script>
 import { mapGetters } from 'vuex';
 import get from 'lodash.get';
-import logger from '@/utils/logger';
 import normalizer from '@/utils/normalizer';
 import router from '@/router';
 import store from '@/store';
