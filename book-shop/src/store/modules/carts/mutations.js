@@ -88,12 +88,12 @@ const INCREASE_BOOK_IN_CART = (state, id) => {
  * @param {import("../products").Book} book
  */
 const EDIT_BOOK_CART = (state, book) => {
-  const { books } = state;
-  const index = books.indexOf(book);
+  // const { books } = state;
+  // const index = books.indexOf(book);
 
-  if (index > -1) {
-    books[index] = book;
-  }
+  // if (index > -1) {
+  //   books[index] = book;
+  // }
 };
 
 /**

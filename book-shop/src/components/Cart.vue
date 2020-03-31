@@ -86,11 +86,11 @@ export default {
       this.$store.dispatch('carts/increaseBookInCart', id);
     },
     onClickRemove(id) {
-      this.$dialog.confirm('Do you want to remove this product?')
+      return this.$dialog.confirm('Do you want to remove this product?')
         .then(() => this.$store.dispatch('carts/removeBookFromCart', id));
     },
     onClickRemoveAll() {
-      this.$dialog.confirm('Do you want to empty the cart?')
+      return this.$dialog.confirm('Do you want to empty the cart?')
         .then(() => this.$store.dispatch('carts/clearCart'));
     },
     normalizeCurrency(money) {
