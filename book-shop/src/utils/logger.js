@@ -8,7 +8,7 @@ import { ALLOW_LOG_LEVEL } from '../config';
  */
 function debug(message, obj) {
   if (ALLOW_LOG_LEVEL === 'debug') {
-    console.log(message, JSON.stringify(obj) || ''); // eslint-disable-line
+    console.log(message, obj || ''); // eslint-disable-line
   }
 }
 /**

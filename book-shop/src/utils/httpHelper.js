@@ -1,4 +1,4 @@
-import { ENABLED_PROXY, PROXY_URL } from '../config';
+import { PROXY_URL } from '../config';
 import logger from './logger';
 
 // import axios from 'axios';
@@ -7,9 +7,9 @@ import logger from './logger';
  * @param {string} url
  * @returns {string}
  */
-function generateUrl(url) {
+function generateProxyUrl(url) {
   const proxyUrl = PROXY_URL;
-  return ENABLED_PROXY === 'ON' ? proxyUrl + url : url;
+  return proxyUrl + url;
 }
 
 /**
@@ -17,23 +17,15 @@ function generateUrl(url) {
  * @param {string} param0.path
  */
 async function getRequest(url) {
+  const option = {
+    // mode: 'no-cors',
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
   return new Promise((resolve, reject) => {
-    // axios.get(url, {
-    //   mode: 'no-cors',
-    // })
-    //   .then((res) => {
-    //     console.log(res);
-    //     return resolve(res);
-    //   })
-    //   .catch(error => reject(new Error(`GET ${url} ${error.message}`)));
-    // proxyUrl +
-    fetch(generateUrl(url), {
-      // mode: 'no-cors',
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+    fetch(url, option)
       .then((res) => {
         logger.debug(res);
         if (res.ok) {
@@ -45,7 +37,18 @@ async function getRequest(url) {
         logger.debug(json);
         return resolve(json);
       })
-      .catch(error => reject(new Error(`GET ${url} ${error.message}`)));
+      .catch((error) => {
+        logger.debug('Retry Fetch data', error);
+        fetch(generateProxyUrl(url), option)
+          .then((res) => {
+            if (res.ok) {
+              return res.json();
+            }
+            return reject({ status: res.status });
+          })
+          .then(json => resolve(json))
+          .catch(exception => reject(new Error(`GET ${url} ${exception.message}`)));
+      });
   });
 }
 
