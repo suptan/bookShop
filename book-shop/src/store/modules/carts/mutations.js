@@ -87,7 +87,7 @@ const INCREASE_BOOK_IN_CART = (state, id) => {
  * @param {import(".").CartState} state
  * @param {import("../products").Book} book
  */
-const EDIT_BOOK_CART = (state, book) => {
+const EDIT_BOOK_CART = (state, book) => { // eslint-disable-line
   // const { books } = state;
   // const index = books.indexOf(book);
 
