@@ -22,19 +22,20 @@
 
 <script>
 import store from '@/store';
+
 export default {
   name: 'SearchArea',
   data() {
     return {
       txtInput: '',
-    }
+    };
   },
   methods: {
     onEnter: (e) => {
       store.dispatch('products/filterBooks', e.target.value);
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped src="@/assets/styles/search-area.scss">

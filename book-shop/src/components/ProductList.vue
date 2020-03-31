@@ -33,7 +33,7 @@ export default {
       isFetchBooks: 'products/isFetchBooks',
     }),
   },
-}
+};
 </script>
 
 <style lang="scss" scoped src="@/assets/styles/product-list.scss">

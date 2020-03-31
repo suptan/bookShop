@@ -25,11 +25,10 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import LayoutDefault from '@/layouts/LayoutDefault'
-import ProductList from '@/components/ProductList'
-import Cart from '@/components/Cart'
+import LayoutDefault from '@/layouts/LayoutDefault';
+import ProductList from '@/components/ProductList';
+import Cart from '@/components/Cart';
 import normalizer from '@/utils/normalizer';
-import router from '../router'
 
 export default {
   name: 'HomeView',
@@ -59,8 +58,8 @@ export default {
     normalizeCurrency(money) {
       return normalizer.THBCurrency(money);
     },
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped src="@/assets/styles/home-view.scss">

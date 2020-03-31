@@ -8,13 +8,13 @@
 export default {
   name: 'App',
   created() {
-    console.log('I was born here');
+    console.log('I was born here'); //eslint-disable-line
   },
   mounted() {
-    console.log('I was render here');
+    console.log('I was render here'); //eslint-disable-line
   },
   beforeDestroy() {
-    console.log('This is my last word');
+    console.log('This is my last word'); //eslint-disable-line
   },
 };
 </script>

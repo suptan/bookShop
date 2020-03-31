@@ -14,16 +14,15 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import LayoutDefault from '@/layouts/LayoutDefault'
-import Cart from '@/components/Cart'
-import CashPayment from '@/components/CashPayment'
-import router from '../router'
+import LayoutDefault from '@/layouts/LayoutDefault';
+import CashPayment from '@/components/CashPayment';
+import router from '../router';
 
 export default {
   name: 'PaymentView',
   components: {
     LayoutDefault,
-    CashPayment
+    CashPayment,
   },
   computed: {
     ...mapGetters({
@@ -32,10 +31,10 @@ export default {
   },
   methods: {
     navigate() {
-      router.push({ name: 'HomeView' })
-    }
-  }
-}
+      router.push({ name: 'HomeView' });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped src="@/assets/styles/payment-view.scss">

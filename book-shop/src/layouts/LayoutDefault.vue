@@ -12,7 +12,7 @@
 <script>
 export default {
   name: 'LayoutDefault',
-}
+};
 </script>
 
 <style lang="scss" scoped src="@/assets/styles/layout-default.scss">

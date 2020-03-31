@@ -1,8 +1,12 @@
 <template>
-  <div :class="`${$options.name}`">
+  <div :class="`${$options.name}`"
+    v-if="!isCartEmpty()"
+  >
     <div :class="`${$options.name}__header`">
       <div>
-        <span><img src="../assets/icons/cash.png" alt="cash" :class="`${$options.name}__icon`"></span>
+        <span>
+          <img src="../assets/icons/cash.png" alt="cash" :class="`${$options.name}__icon`">
+        </span>
         <span>Cash</span>
       </div>
       <div>{{ normalizeCurrency(cart.total) }}</div>
@@ -21,7 +25,10 @@
         </div>
       </div>
       <div :class="`${$options.name}__macro`">
-        <div :class="'cursor-pointer'" @click="onClickHundredUp(cart.total)">{{ roundUp(cart.total) }}</div>
+        <div
+          :class="'cursor-pointer'"
+          @click="onClickHundredUp(cart.total)"
+        >{{ normalizeCurrency(roundUp(cart.total)) }}</div>
         <div :class="'cursor-pointer'" @click="onClickExact(cart.total)">Exact</div>
       </div>
       <div :class="`${$options.name}__footer`">
@@ -29,12 +36,15 @@
       </div>
     </div>
   </div>
+  <div :class="`${$options.name}`" v-else>Cart Empty</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import get from 'lodash.get';
+import logger from '@/utils/logger';
 import normalizer from '@/utils/normalizer';
-import router from '@/router'
+import router from '@/router';
 import store from '@/store';
 
 const baseTemplate = '<div><b>Sale complete</b></div>';
@@ -68,18 +78,22 @@ export default {
       const change = this.roundUp(this.txtInput) - total;
 
       if (change < 0) {
-        this.$dialog.alert('Please fill in the correct amount', { html: true, okText: 'OK' })
+        this.$dialog.alert('Please fill in the correct amount', { html: true, okText: 'OK' });
       } else {
         const displayChange = change > 0
           ? changeTemplate.replace('$0', normalizer.THBCurrency(change))
-          : ''
+          : '';
         const message = baseTemplate + displayChange;
         this.paymentSuccess(message);
       }
     },
+    isCartEmpty() {
+      logger.debug('Check item in cart');
+      return get(this, ['cart', 'item', 'books', 'length'], 0) < 1;
+    },
     roundUp(money) {
       if (!money) return -1;
-      return Math.ceil(Math.ceil(money/10)/10) * 100;
+      return Math.ceil(Math.ceil(money / 10) / 10) * 100;
     },
     normalizeCurrency(money) {
       return normalizer.THBCurrency(money);
@@ -89,10 +103,10 @@ export default {
         .then(() => {
           store.dispatch('carts/clearCart');
           router.push({ name: 'HomeView' });
-        })
-    }
+        });
+    },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped src="@/assets/styles/cash-payment.scss">
