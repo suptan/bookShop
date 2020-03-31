@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import LayoutDefault from '@/layouts/LayoutDefault';
 import CashPayment from '@/components/CashPayment';
 import router from '../router';

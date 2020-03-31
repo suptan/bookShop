@@ -68,23 +68,23 @@ export default {
       const recieved = this.roundUp(money);
       const change = recieved - total;
       const message = baseTemplate + changeTemplate.replace('$0', normalizer.THBCurrency(change));
-      this.paymentSuccess(message);
+      return this.paymentSuccess(message);
     },
     onClickExact() {
-      this.paymentSuccess(baseTemplate);
+      return this.paymentSuccess(baseTemplate);
     },
     onPayNow() {
       const { total } = this.cart;
-      const change = this.roundUp(this.txtInput) - total;
+      const change = this.txtInput - total;
 
       if (change < 0) {
-        this.$dialog.alert('Please fill in the correct amount', { html: true, okText: 'OK' });
+        return this.$dialog.alert('Please fill in the correct amount', { html: true, okText: 'OK' });
       } else {
         const displayChange = change > 0
           ? changeTemplate.replace('$0', normalizer.THBCurrency(change))
           : '';
         const message = baseTemplate + displayChange;
-        this.paymentSuccess(message);
+        return this.paymentSuccess(message);
       }
     },
     isCartEmpty() {
@@ -99,7 +99,7 @@ export default {
       return normalizer.THBCurrency(money);
     },
     paymentSuccess(message) {
-      this.$dialog.alert(message, { html: true, okText: 'OK' })
+      return this.$dialog.alert(message, { html: true, okText: 'OK' })
         .then(() => {
           store.dispatch('carts/clearCart');
           router.push({ name: 'HomeView' });
