@@ -11,9 +11,18 @@
 
 [Configuration](#configuration)
 
+[Running Your Application](#running-your-application)
+## Demo
+
+[Live Demo](https://suptantesting1.github.io)
+
 ## Project Structure
 
 ````
+config/
+|- dev.env.js ________________________ # Configuration for Development environment
+|- prod.env.js _______________________ # Configuration for Production environment
+|- test.env.js _______________________ # Configuration for Test environment
 src/
 |- api/ ______________________________ # Gateway to API
 |- assets/ ___________________________ # Application assets
@@ -23,8 +32,8 @@ src/
 |- layouts/ __________________________ # Application Layout
 |- router/ ___________________________ # Application Routes
 |- store/ ____________________________ # Application Storage
-|    |- modules ______________________ # Manage based on namespace module structure
-|       |- carts _____________________ # Represent to state in Vuex in this case is carts
+|    |- modules ______________________ # A namespaced module based Vuex store structure
+|       |- carts _____________________ # Represent to carts state in Vuex
 |          |- actions.js
 |          |- getters.js
 |          |- index.js
@@ -32,7 +41,7 @@ src/
 |- utils/ ____________________________ # Utilities Functions
 |- views/ ____________________________ # Application Pages
 |- App.vue ___________________________ # Application Entry
-|- config.js _________________________ # Application Configuration
+|- config.js _________________________ # Application Configuration Wrapper
 |- main.js ___________________________ # Application Initialization
 ````
 
@@ -74,4 +83,20 @@ npm test
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-[commit guideline](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-guidelines)
+## Configuration
+```
+{
+    ALLOW_LOG_LEVEL: 'debug' #Enable debug log when set to 'debug' mode
+    NODE_ENV: 'development' #Application running environment
+    PROXY_URL: '' #Fallback http request when encounter CORS
+    RESOURCE_URL: 'https://json-bin.netlify.com/books.json' #API for fetch available book resource
+}
+```
+
+## Running Your Application
+
+Run your application using npm:
+```
+$ npm run dev
+```
+Your application should run on port 8080 with the development environment configuration, so in your browser just go to http://localhost:8080
