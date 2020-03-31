@@ -1,6 +1,6 @@
 <template>
   <div :class="`${$options.name}`"
-    v-if="!isCartEmpty()"
+    v-if="!isCartEmpty"
   >
     <div :class="`${$options.name}__header`">
       <div>
@@ -20,6 +20,7 @@
               placeholder="0"
               :class="`${$options.name}__input`"
               v-model="txtInput"
+              @keyup.enter="onPayNow"
             >
           </span>
         </div>
@@ -55,12 +56,16 @@ export default {
   data() {
     return {
       txtInput: undefined,
+      isCartEmpty: true,
     };
   },
   computed: {
     ...mapGetters({
       cart: 'carts/cart',
     }),
+  },
+  created() {
+    this.isCartEmpty = get(this, ['cart', 'item', 'books', 'length'], 0) < 1;
   },
   methods: {
     onClickHundredUp(money) {
@@ -79,17 +84,13 @@ export default {
 
       if (change < 0) {
         return this.$dialog.alert('Please fill in the correct amount', { html: true, okText: 'OK' });
-      } else {
-        const displayChange = change > 0
-          ? changeTemplate.replace('$0', normalizer.THBCurrency(change))
-          : '';
-        const message = baseTemplate + displayChange;
-        return this.paymentSuccess(message);
       }
-    },
-    isCartEmpty() {
-      logger.debug('Check item in cart');
-      return get(this, ['cart', 'item', 'books', 'length'], 0) < 1;
+
+      const displayChange = change > 0
+        ? changeTemplate.replace('$0', normalizer.THBCurrency(change))
+        : '';
+      const message = baseTemplate + displayChange;
+      return this.paymentSuccess(message);
     },
     roundUp(money) {
       if (!money) return -1;

@@ -30,6 +30,13 @@ describe('CashPayment.vue', () => {
     wrapper.destroy();
   });
 
+  describe('Created', () => {
+    it('should mount with initialize data', () => {
+      expect(wrapper.vm.txtInput).toBe(undefined);
+      expect(wrapper.vm.isCartEmpty).toBe(false);
+    });
+  });
+
   describe('Methods', () => {
     describe('onClickHundredUp()', () => {
       it('should', async () => {
