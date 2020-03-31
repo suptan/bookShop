@@ -3,10 +3,10 @@
     <div :class="`${$options.name}__content`">
       <span :class="`${$options.name}__inputBox`">
         <input
-          v-model="txtInput"
           type="text"
           placeholder="search books..."
-          v-on:keyup.enter="onEnter"
+          v-model="searchTxtInput"
+          @keyup.enter="onEnter"
         />
       </span>
       <span>
@@ -27,12 +27,12 @@ export default {
   name: 'SearchArea',
   data() {
     return {
-      txtInput: '',
+      searchTxtInput: undefined,
     };
   },
   methods: {
-    onEnter: (e) => {
-      store.dispatch('products/filterBooks', e.target.value);
+    onEnter() {
+      store.dispatch('products/filterBooks', this.searchTxtInput);
     },
   },
 };
