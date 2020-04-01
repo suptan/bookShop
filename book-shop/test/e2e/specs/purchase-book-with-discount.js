@@ -41,7 +41,6 @@ module.exports = {
     const payment = browser.page.Payment();
 
     payment.navigateToHome(browser);
-
     home.expectPageContainerIsPresent();
 
     browser.end();

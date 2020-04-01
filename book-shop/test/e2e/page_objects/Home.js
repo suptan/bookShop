@@ -45,12 +45,31 @@ const homePageCommands = {
       return true;
     }, []);
   },
+  pickDuplicateHarryWithMixTwoBooks(browser) {
+    return browser
+      .execute(() => {
+        const books = [
+          'Harry Potter and the Goblet of Fire (IV)',
+          'Enlightenment Now',
+          'Elastic'];
+        document.querySelectorAll('[data-qe="book-title"]').forEach((element) => {
+          if (books.includes(element.innerText)) {
+            element.click();
+
+            if (element.innerText === books[0]) {
+              element.click();
+            }
+          }
+        });
+        return true;
+      }, []);
+  },
   navigateToPayment(browser) {
     return browser
       .execute(() => {
         document.querySelector('[data-qe="to-payment"]').click();
         return true;
-      }, []);
+      }, []).pause(200);
   },
 };
 

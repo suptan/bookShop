@@ -1,4 +1,12 @@
 const paymentPageCommands = {
+  expectSaleCompleteDialogWithOutChange() {
+    return this.expect
+      .element('@saleComplete')
+      .text.to.equal('Sale Complete')
+      && this.expect
+        .element('@changeAmount')
+        .to.be.not.present;
+  },
   expectSaleCompleteDialogWithChange() {
     return this.expect
       .element('@saleComplete')
@@ -14,11 +22,18 @@ const paymentPageCommands = {
       return true;
     }, []);
   },
+  payExact(browser) {
+    return browser
+      .execute(() => {
+        document.querySelector('[data-qe="pay-exact"]').click();
+        return true;
+      }, []);
+  },
   navigateToHome(browser) {
     return browser.execute(() => {
       document.getElementsByClassName('dg-btn dg-btn--ok dg-pull-right')[0].click();
       return true;
-    }, []);
+    }, []).pause(200);
   },
 };
 
