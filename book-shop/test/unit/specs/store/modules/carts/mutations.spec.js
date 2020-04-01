@@ -3,7 +3,9 @@ import { HARRY_DISCOUNT } from '@/utils/constant';
 import { mockBooks } from '../../../../__mocks__/products';
 
 jest.mock('vue', () => ({
-  set: jest.fn((obj, index, newObj) => obj[index] = newObj),
+  set: jest.fn((obj, index, newObj) => {
+    obj[index] = newObj; //eslint-disable-line
+  }),
 }));
 
 describe('products/mutations', () => {
@@ -13,8 +15,15 @@ describe('products/mutations', () => {
 
     beforeEach(() => {
       books = [];
-      state = { cart: { item: { books }, subTotal: 0 } };
+      state = {
+        cart: {
+          item: { books },
+          subTotal: 0,
+          discount: { books: { harry: {} } },
+        },
+      };
     });
+
     it('should add new book when cart is empty', () => {
       const input = Array.from(mockBooks);
       mutations.ADD_TO_CART(state, input[0]);
@@ -74,12 +83,62 @@ describe('products/mutations', () => {
       );
       expect(state.cart.subTotal).toBe(+mockBooks[0].price + mockBooks[1].price);
     });
+
+    it('should add discount key when found Harry Potter series', () => {
+      const mockHarry = {
+        id: 'e4g',
+        title: 'Harry Potter Part 1',
+        price: 200,
+      };
+      mutations.ADD_TO_CART(state, mockHarry);
+
+      const resultKeys = Object.keys(state.cart.discount.books.harry);
+      expect(resultKeys.length).toEqual(1);
+      expect(resultKeys[0]).toEqual(mockHarry.id);
+      expect(state.cart.discount.books.harry[resultKeys]).toEqual(mockHarry.price);
+    });
+
+    it('should add discount key one time when found duplicate Harry Potter series', () => {
+      const mockHarry = {
+        id: 'e4g',
+        title: 'Harry Potter Part 1',
+        price: 200,
+      };
+      mutations.ADD_TO_CART(state, mockHarry);
+      mutations.ADD_TO_CART(state, mockHarry);
+
+      const resultKeys = Object.keys(state.cart.discount.books.harry);
+      expect(resultKeys.length).toEqual(1);
+      expect(resultKeys[0]).toEqual(mockHarry.id);
+      expect(state.cart.discount.books.harry[resultKeys]).toEqual(mockHarry.price);
+    });
+
+    it('should add discount keys when found many unique Harry Potter series', () => {
+      const mockHarry = [
+        { id: 'e4g', title: 'Harry Potter Part 1', price: 20 },
+        { id: '1rf5', title: 'Harry Potter Part 12', price: 200 },
+        { id: 'nj8@', title: 'Harry Potter Part 11', price: 2000 },
+      ];
+      const mockResult = mockHarry.reduce((obj, harry) => {
+        obj[harry.id] = harry.price; // eslint-disable-line
+        return obj;
+      }, {});
+
+      mockHarry.map((input) => { // eslint-disable-line array-callback-return
+        mutations.ADD_TO_CART(state, input);
+      });
+
+      const resultKeys = Object.keys(state.cart.discount.books.harry);
+      expect(resultKeys.length).toEqual(3);
+      expect(state.cart.discount.books.harry).toEqual(mockResult);
+    });
   });
 
   describe('REMOVE_FROM_CART', () => {
     let books;
     let subTotal;
     let state;
+    let mockHarry;
 
     beforeEach(() => {
       const bookItems = [
@@ -90,10 +149,24 @@ describe('products/mutations', () => {
           ...mockBooks[1],
           total: mockBooks[1].price,
         },
+        { id: '@riop', price: 0, total: 0 },
+        { id: '6gb3', price: 0, total: 0 },
+        { id: '1112', price: 0, total: 0 },
       ];
       books = Array.from(bookItems);
       subTotal = 1000;
-      state = { cart: { item: { books: Array.from(bookItems) }, subTotal } };
+      mockHarry = {
+        '@riop': 1,
+        '6gb3': 2,
+        1112: 3,
+      };
+      state = {
+        cart: {
+          item: { books: Array.from(bookItems) },
+          subTotal,
+          discount: { books: { harry: mockHarry } },
+        },
+      };
     });
 
     it('should not change anything when remove book that not in cart', () => {
@@ -134,6 +207,20 @@ describe('products/mutations', () => {
       mutations.REMOVE_FROM_CART(state, '1');
 
       expect(state.cart.item.books.length).toBe(0);
+    });
+
+    it('should be able to remove harry discount key', () => {
+      mutations.REMOVE_FROM_CART(state, '1112');
+
+      expect(mockHarry[1112]).toBe(undefined);
+      expect(mockHarry['6gb3']).toBe(2);
+      expect(mockHarry['@riop']).toBe(1);
+    });
+
+    it('should not remove harry discount key', () => {
+      mutations.REMOVE_FROM_CART(state, mockBooks[0].id);
+
+      expect(mockHarry).toEqual({ '@riop': 1, '6gb3': 2, 1112: 3 });
     });
   });
 

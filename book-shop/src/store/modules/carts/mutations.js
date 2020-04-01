@@ -87,13 +87,13 @@ const INCREASE_BOOK_IN_CART = (state, id) => {
  * @param {import(".").CartState} state
  * @param {import("../products").Book} book
  */
-const EDIT_BOOK_CART = (state, book) => {
-  const { books } = state;
-  const index = books.indexOf(book);
+const EDIT_BOOK_CART = (state, book) => { // eslint-disable-line
+  // const { books } = state;
+  // const index = books.indexOf(book);
 
-  if (index > -1) {
-    books[index] = book;
-  }
+  // if (index > -1) {
+  //   books[index] = book;
+  // }
 };
 
 /**
@@ -130,7 +130,11 @@ const CALCULATE_DISCOUNT = (state) => {
 
   const keys = Object.keys(harry);
   const basePrice = keys.reduce((sum, key) => sum + harry[key], 0);
-  const discountAmount = basePrice * (HARRY_DISCOUNT[keys.length - 1] / 100);
+  let discountAmount = 0;
+
+  if (keys.length > 0) {
+    discountAmount = basePrice * (HARRY_DISCOUNT[keys.length - 1] / 100);
+  }
   const total = subTotal - discountAmount;
 
   state.cart.total = total;

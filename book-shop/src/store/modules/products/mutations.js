@@ -22,7 +22,17 @@ const FILTER_BOOKS = (state, title) => {
   state.displayBooks = displayBooks;
 };
 
+/**
+ *
+ * @param {import(".").BooksState} state
+ * @param {boolean} flag
+ */
+const SET_IS_FETCH_BOOK = (state, flag) => {
+  state.isFetchBooks = flag;
+};
+
 export default {
   BOOKS_UPDATED,
   FILTER_BOOKS,
+  SET_IS_FETCH_BOOK,
 };

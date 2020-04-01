@@ -8,7 +8,10 @@
       :key="book.id"
       :book="book"
       />
-      <div v-if="!books || books.length === 0">No Books</div>
+      <div :class="`${$options.name}__spinner`" v-if="isFetchBooks">
+        <div :class="'spinner'"></div>
+      </div>
+      <div v-if="(!books || books.length === 0) && !isFetchBooks">No Books</div>
     </div>
   </div>
 </template>
@@ -27,9 +30,10 @@ export default {
   computed: {
     ...mapGetters({
       books: 'products/displayBooks',
+      isFetchBooks: 'products/isFetchBooks',
     }),
   },
-}
+};
 </script>
 
 <style lang="scss" scoped src="@/assets/styles/product-list.scss">

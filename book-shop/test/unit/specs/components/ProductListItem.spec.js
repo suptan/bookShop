@@ -38,7 +38,8 @@ describe('ProductListItem.vue', () => {
         wrapper = shallowMount(ProductListItem, { store, localVue, propsData });
         wrapper.vm.onClick(input);
 
-        expect(mockCartsState.actions.addBookToCart).toHaveBeenCalledWith(expect.any(Object), input);
+        expect(mockCartsState.actions.addBookToCart)
+          .toHaveBeenCalledWith(expect.any(Object), input);
       });
     });
     describe('normalizeCurrency', () => {

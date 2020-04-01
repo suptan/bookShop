@@ -32,16 +32,18 @@ const mockCarts = {
   },
 };
 
+const mockCartsActions = {
+  addBookToCart: jest.fn(),
+  removeBookFromCart: jest.fn(),
+  decreaseBookInCart: jest.fn(),
+  increaseBookInCart: jest.fn(),
+  clearCart: jest.fn(),
+};
+
 const mockCartsState = {
   namespaced: true,
   state: { cart: mockCarts },
-  actions: {
-    addBookToCart: jest.fn(),
-    removeBookFromCart: jest.fn(),
-    decreaseBookInCart: jest.fn(),
-    increaseBookInCart: jest.fn(),
-    clearCart: jest.fn(),
-  },
+  actions: mockCartsActions,
   getters: {
     cart: () => mockCarts,
     item: () => mockItem,
@@ -60,5 +62,6 @@ const mockCartsState = {
 export {
   mockItem,
   mockCarts,
+  mockCartsActions,
   mockCartsState,
 };

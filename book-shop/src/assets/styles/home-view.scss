@@ -43,7 +43,7 @@
       left: 0;
 
       > span {
-        position: absolute;
+        position: fixed;
         top: 6px;
         right: 6px;
         z-index: 1001;
@@ -70,12 +70,16 @@
       position: fixed;
       bottom: 0px;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       width: 100%;
       height: $main-button-height;
       background-color: $main-color;
       color: $text-sub-color;
+
+      > div {
+        margin: 0 $space-large;
+      }
     }
   }
 

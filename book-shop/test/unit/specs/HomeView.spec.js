@@ -1,12 +1,12 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import HomeView from '@/views/Home';
-import router from '@/router';
+import normalizer from '@/utils/normalizer';
 import { createStoreMocks } from '../__mocks__';
 import { mockBooks } from '../__mocks__/products';
 
-jest.mock('@/router', () => ({
-  push: jest.fn(),
+jest.mock('@/utils/normalizer', () => ({
+  THBCurrency: jest.fn(),
 }));
 jest.mock('@/store');
 const localVue = createLocalVue();
@@ -36,11 +36,19 @@ describe('Home.vue', () => {
     expect(results).toBe(mockBooks);
   });
   describe('Methods', () => {
-    describe('navigate', () => {
-      it('should be call when click submit', () => {
+    describe('countItems', () => {
+      it('should return amount of items in cart', () => {
         wrapper = shallowMount(HomeView, { store, localVue });
-        wrapper.vm.navigate();
-        expect(router.push).toHaveBeenCalledWith({ name: 'Page2View' });
+        const result = wrapper.vm.countItems();
+        expect(result).toEqual(6);
+      });
+    });
+    describe('normalizeCurrency', () => {
+      it('should call to normalizer.THBCurrency', () => {
+        wrapper = shallowMount(HomeView, { store, localVue });
+        wrapper.vm.normalizeCurrency(0);
+
+        expect(normalizer.THBCurrency).toHaveBeenCalledWith(0);
       });
     });
   });

@@ -13,6 +13,7 @@ import mutations from './mutations';
  * @typedef {Object} BooksState
  * @property {Book[]} books
  * @property {Book[]} displayBooks
+ * @property {boolean} isFetchBooks
  */
 /**
  * @type {BooksState} state
@@ -20,6 +21,7 @@ import mutations from './mutations';
 const state = {
   books: [],
   displayBooks: [],
+  isFetchBooks: false,
 };
 
 export default {

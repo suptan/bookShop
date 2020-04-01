@@ -1,16 +1,22 @@
 // Not support on web browser
 // import winston from 'winston';
-// import { NODE_ENV, ALLOW_LOG_LEVEL } from '../config';
+import { ALLOW_LOG_LEVEL } from '../config';
 
 /**
- * @param {stirng} message
+ * @param {string} message
  * @param {Object} obj
  */
-function debug(message, obj) { console.log(message, JSON.stringify(obj) || ''); }
+function debug(message, obj) {
+  if (ALLOW_LOG_LEVEL === 'debug') {
+    console.log(message, obj || ''); // eslint-disable-line
+  }
+}
 /**
  * @param {Error} ex
  */
-function error(ex) { console.log(ex); }
+function error(ex) {
+  console.log(ex); // eslint-disable-line
+}
 
 const logger = {
   debug,

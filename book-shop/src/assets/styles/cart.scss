@@ -20,6 +20,7 @@
 
     @include mobile {
       margin: 0;
+      height: 100vh;
     }
   }
 
@@ -47,6 +48,10 @@
   &__content {
     display: flex;
     flex-direction: column;
+
+    @include mobile {
+      height: calc(100% - 100px);
+    }
   }
 
   &__row {
@@ -79,8 +84,8 @@
     overflow: auto;
 
     @include mobile {
-      height: 54vh;
-      max-height: 54vh;
+      height: 100%;
+      max-height: 100vh;
     }
   }
 
@@ -111,6 +116,7 @@
 
   &__empty {
     padding: $space-large;
+    font-style: italic;
   }
 
   &__footer {
@@ -122,6 +128,10 @@
     align-items: center;
     border-radius: 0 0 $space-small $space-small;
     cursor: pointer;
+
+    @include mobile {
+      border-radius: 0;
+    }
   }
 
   &__label {

@@ -12,17 +12,23 @@
           <cart />
         </div>
       </div>
-      <div :class="`${$options.name}__basket`" @click="isShow = true">Basket</div>
+      <div :class="`${$options.name}__basket`" @click="isShow = true">
+        <div>
+          <span>Cart</span>
+          <span><b>{{ countItems() }}</b> item(s)</span>
+        </div>
+        <div><b>{{ normalizeCurrency(cart.total) }}</b></div>
+      </div>
     </div>
   </layout-default>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import LayoutDefault from '@/layouts/LayoutDefault'
-import ProductList from '@/components/ProductList'
-import Cart from '@/components/Cart'
-import router from '../router'
+import LayoutDefault from '@/layouts/LayoutDefault';
+import ProductList from '@/components/ProductList';
+import Cart from '@/components/Cart';
+import normalizer from '@/utils/normalizer';
 
 export default {
   name: 'HomeView',
@@ -39,17 +45,21 @@ export default {
   computed: {
     ...mapGetters({
       books: 'products/books',
+      cart: 'carts/cart',
     }),
   },
   mounted() {
     this.$store.dispatch('products/getBooks');
   },
   methods: {
-      navigate() {
-          router.push({ name: 'Page2View' });
-      },
-  }
-}
+    countItems() {
+      return this.cart.item.books.reduce((sum, book) => sum + book.amount, 0);
+    },
+    normalizeCurrency(money) {
+      return normalizer.THBCurrency(money);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped src="@/assets/styles/home-view.scss">
