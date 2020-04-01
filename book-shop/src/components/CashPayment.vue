@@ -30,7 +30,11 @@
           :class="'cursor-pointer'"
           @click="onClickHundredUp(cart.total)"
         >{{ normalizeCurrency(roundUp(cart.total)) }}</div>
-        <div :class="'cursor-pointer'" @click="onClickExact(cart.total)">Exact</div>
+        <div
+          :class="'cursor-pointer'"
+          @click="onClickExact(cart.total)"
+          data-qe="pay-exact"
+        >Exact</div>
       </div>
       <div :class="`${$options.name}__footer`">
         <div :class="[`${$options.name}__submit`, 'cursor-pointer']" @click="onPayNow">Pay Now</div>
@@ -47,8 +51,8 @@ import normalizer from '@/utils/normalizer';
 import router from '@/router';
 import store from '@/store';
 
-const baseTemplate = '<div><b>Sale complete</b></div>';
-const changeTemplate = '<br><div>Change: $0</div>';
+const baseTemplate = '<div data-qe="sale-complete"><b>Sale Complete</b></div>';
+const changeTemplate = '<br><div data-qe="change-amount">Change: $0</div>';
 
 export default {
   name: 'CashPayment',

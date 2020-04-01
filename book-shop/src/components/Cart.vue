@@ -6,7 +6,11 @@
       </div>
       <div :class="`${$options.name}__content`">
         <div :class="[`${$options.name}__row`, `${$options.name}__thead`]">
-            <div @click="onClickRemoveAll()" :class="'cursor-pointer'">
+            <div
+              @click="onClickRemoveAll()"
+              :class="'cursor-pointer'"
+              data-qe="clear-all"
+            >
               <img src="../assets/icons/delete.png" alt="delete">
             </div>
             <div>Name</div>
@@ -43,7 +47,7 @@
               <div></div>
               <div :class="`${$options.name}__label`">Discount</div>
               <div></div>
-              <div :class="`${$options.name}__price`">
+              <div :class="`${$options.name}__price`" data-qe="cart-discount">
                 <span>{{ normalizeCurrency(cart.discount.amount) }}</span>
               </div>
             </div>
@@ -51,7 +55,7 @@
               <div></div>
               <div :class="`${$options.name}__label`">Sub Total</div>
               <div></div>
-              <div :class="`${$options.name}__price`">
+              <div :class="`${$options.name}__price`" data-qe="cart-sub-total">
                 <span>{{ normalizeCurrency(cart.subTotal) }}</span>
               </div>
             </div>
@@ -60,6 +64,7 @@
       <div
         :class="`${$options.name}__footer`"
         @click="navigate(cart.total)"
+        data-qe="to-payment"
       >Pay ({{ normalizeCurrency(cart.total) }})</div>
     </div>
   </div>

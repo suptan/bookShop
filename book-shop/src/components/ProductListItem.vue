@@ -4,9 +4,9 @@
       <img :src="`${book.cover}`" :alt="`${book.title}`" />
     </div>
     <div :class="`${$options.name}__info`">
-      <span :class="`${$options.name}__title`">{{ book.title }}</span>
+      <span :class="`${$options.name}__title`" data-qe="book-title">{{ book.title }}</span>
       <span :class="`${$options.name}__price`">
-        <span>{{ normalizeCurrency(book.price) }}</span>
+        <span data-qe="book-price">{{ normalizeCurrency(book.price) }}</span>
       </span>
     </div>
   </div>
