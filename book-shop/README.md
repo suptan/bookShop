@@ -52,6 +52,11 @@ Make sure you have installed all of the following prerequisites on your developm
 
 ## Build Setup
 
+Make sure you go inside project folder
+```
+$ npm cd book-shop/
+```
+
 ``` bash
 # install dependencies
 npm install
