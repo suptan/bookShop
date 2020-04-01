@@ -29,6 +29,7 @@
         <div
           :class="'cursor-pointer'"
           @click="onClickHundredUp(cart.total)"
+          data-qe="pay-hundred-round-up"
         >{{ normalizeCurrency(roundUp(cart.total)) }}</div>
         <div
           :class="'cursor-pointer'"
@@ -37,7 +38,11 @@
         >Exact</div>
       </div>
       <div :class="`${$options.name}__footer`">
-        <div :class="[`${$options.name}__submit`, 'cursor-pointer']" @click="onPayNow">Pay Now</div>
+        <div
+          :class="[`${$options.name}__submit`, 'cursor-pointer']"
+          @click="onPayNow"
+          data-qe="pay-amount"
+        >Pay Now</div>
       </div>
     </div>
   </div>
