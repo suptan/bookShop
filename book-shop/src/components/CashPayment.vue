@@ -19,6 +19,7 @@
               type="number"
               placeholder="0"
               :class="`${$options.name}__input`"
+              data-qe="input-amount"
               v-model="txtInput"
               @keyup.enter="onPayNow"
             >
@@ -41,7 +42,7 @@
         <div
           :class="[`${$options.name}__submit`, 'cursor-pointer']"
           @click="onPayNow"
-          data-qe="pay-amount"
+          data-qe="pay-now"
         >Pay Now</div>
       </div>
     </div>
@@ -90,7 +91,9 @@ export default {
       const { total } = this.cart;
       const change = this.txtInput - total;
 
-      if (change < 0) {
+console.log(change, this.txtInput);
+
+      if (!this.txtInput || !change || change < 0) {
         return this.$dialog.alert('Please fill in the correct amount', { html: true, okText: 'OK' });
       }
 

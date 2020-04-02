@@ -1,3 +1,8 @@
+const bookTitleSelector = '[data-qe="book-title"]';
+/**
+ * @typedef {Object} HomePageCommands
+ * @property {function():any} waitForMainElement
+ */
 const homePageCommands = {
   // expectAssert
   assertTitleIsCorrect(expected = 'book-shop') {
@@ -43,7 +48,8 @@ const homePageCommands = {
         }
       });
       return true;
-    }, []);
+    }, [])
+      .pause(100);
   },
   pickDuplicateHarryWithMixTwoBooks(browser) {
     return browser
@@ -62,7 +68,18 @@ const homePageCommands = {
           }
         });
         return true;
-      }, []);
+      }, [])
+      .pause(100);
+  },
+  pickAllBooksEachOfThem(browser) {
+    return browser
+      .execute((selector) => {
+        document.querySelectorAll(selector).forEach((element) => {
+          element.click();
+        });
+        return true;
+      }, [bookTitleSelector])
+      .pause(100);
   },
   navigateToPayment(browser) {
     return browser
@@ -73,6 +90,10 @@ const homePageCommands = {
   },
 };
 
+/**
+ * @typedef {Object} HomePageObject
+ * @property {HomePageCommands[]} commands
+ */
 module.exports = {
   commands: [homePageCommands],
   url() {

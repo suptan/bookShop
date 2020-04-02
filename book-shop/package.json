@@ -11,6 +11,7 @@
     "unit:coverage": "cross-env NODE_ICU_DATA=node_modules/full-icu jest --config test/unit/jest.conf.js --coverage",
     "unit:watch": "cross-env NODE_ICU_DATA=node_modules/full-icu jest --detectOpenHandles --config test/unit/jest.conf.js --watch ",
     "e2e": "node test/e2e/runner.js",
+    "e2e:single": "node test/e2e/runner.js --test test/e2e/specs/purchase-all-books.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
     "build": "node build/build.js"
