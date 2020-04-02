@@ -19,17 +19,21 @@
         </div>
         <div :class="[`${$options.name}__list`]">
           <div :class="[`${$options.name}__row`]" v-for="book in item.books" :key="book.id">
-              <div @click="onClickRemove(book.id)" :class="'cursor-pointer'">
+              <div @click="onClickRemove(book.id)" :class="'cursor-pointer'" :data-qe="`remove-${book.id}`">
                 <img src="../assets/icons/delete.png" alt="delete">
               </div>
-              <div :class="`${$options.name}__label`">{{ book.title }}</div>
+              <div
+                :class="`${$options.name}__label`"
+                :data-item-id="book.id"
+                data-qe="cart-book-title"
+              >{{ book.title }}</div>
               <div>
                 <div :class="`${$options.name}__quantity`">
-                  <span @click="onClickDecrease(book.id)">
+                  <span @click="onClickDecrease(book.id)" :data-qe="`minus-amount-${book.id}`">
                     <img src="../assets/icons/minus.png" alt="minus">
                   </span>
                   <span :class="`${$options.name}__quantity__label`">{{ book.amount }}</span>
-                  <span @click="onClickIncrease(book.id)">
+                  <span @click="onClickIncrease(book.id)" :data-qe="`plus-amount-${book.id}`">
                     <img src="../assets/icons/plus.png" alt="plus">
                   </span>
                 </div>

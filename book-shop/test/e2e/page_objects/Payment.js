@@ -15,20 +15,24 @@ const paymentPageCommands = {
         .element('@changeAmount')
         .text.to.contain(expected);
   },
+  expectSaleIncompleteDialog() {
+    return this.expect.element('@payFailed')
+      .text.to.equal('Please fill in the correct amount');
+  },
   // End expectAssert
   payHundredRoundUp(browser) {
-    return browser.execute(() => {
-      document.querySelector('[data-qe="pay-hundred-round-up"]').click();
+    return browser.execute((selector) => {
+      document.querySelector(selector).click();
       return true;
-    }, [])
+    }, [this.elements.payHundredRoundUp.selector])
       .pause(100);
   },
   payExact(browser) {
     return browser
-      .execute(() => {
-        document.querySelector('[data-qe="pay-exact"]').click();
+      .execute((selector) => {
+        document.querySelector(selector).click();
         return true;
-      }, [])
+      }, [this.elements.payExact.selector])
       .pause(100);
   },
   /**
@@ -54,11 +58,17 @@ const paymentPageCommands = {
       amount])
       .pause(100);
   },
-  navigateToHome(browser) {
-    return browser.execute(() => {
-      document.getElementsByClassName('dg-btn dg-btn--ok dg-pull-right')[0].click();
+  closeSaleIncompleteDialog(browser) {
+    return browser.execute((selector) => {
+      document.getElementsByClassName(selector)[0].click();
       return true;
-    }, []).pause(200);
+    }, [this.elements.confirmBtn.selector]).pause(200);
+  },
+  navigateToHome(browser) {
+    return browser.execute((selector) => {
+      document.getElementsByClassName(selector)[0].click();
+      return true;
+    }, [this.elements.confirmBtn.selector]).pause(500);
   },
 };
 
@@ -81,10 +91,23 @@ module.exports = {
       //   selector: '//input[@data-qe="input-amount"]',
       locateStrategy: 'xpath',
     },
+    payFailed: {
+      selector: '//div[@data-qe="not-enough-money"]',
+      locateStrategy: 'xpath',
+    },
+    payHundredRoundUp: {
+      selector: '[data-qe="pay-hundred-round-up"]',
+    },
+    payExact: {
+      selector: '[data-qe="pay-exact"]',
+    },
     payNow: {
       selector: '[data-qe="pay-now"]',
-      locateStrategy: 'className',
-
+      locateStrategy: 'querySelector',
+    },
+    confirmBtn: {
+      selector: 'dg-btn dg-btn--ok dg-pull-right',
+      locateStrategy: 'class',
     },
   },
 };

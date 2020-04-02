@@ -1,4 +1,3 @@
-const bookTitleSelector = '[data-qe="book-title"]';
 /**
  * @typedef {Object} HomePageCommands
  * @property {function():any} waitForMainElement
@@ -32,12 +31,12 @@ const homePageCommands = {
   },
   // End expectAssert
   pickHarryWithMixFourBooks(browser) {
-    return browser.execute(() => {
+    return browser.execute((selector) => {
       const books = [
         "Harry Potter and the Philosopher's Stone (I)",
         'Harry Potter and the Chamber of Secrets (II)',
         'The Confidence Project'];
-      document.querySelectorAll('[data-qe="book-title"]').forEach((element) => {
+      document.querySelectorAll(selector).forEach((element) => {
         if (books.includes(element.innerText)) {
           element.click();
 
@@ -48,17 +47,17 @@ const homePageCommands = {
         }
       });
       return true;
-    }, [])
+    }, [this.elements.bookTitle.selector])
       .pause(100);
   },
   pickDuplicateHarryWithMixTwoBooks(browser) {
     return browser
-      .execute(() => {
+      .execute((selector) => {
         const books = [
           'Harry Potter and the Goblet of Fire (IV)',
           'Enlightenment Now',
           'Elastic'];
-        document.querySelectorAll('[data-qe="book-title"]').forEach((element) => {
+        document.querySelectorAll(selector).forEach((element) => {
           if (books.includes(element.innerText)) {
             element.click();
 
@@ -68,7 +67,7 @@ const homePageCommands = {
           }
         });
         return true;
-      }, [])
+      }, [this.elements.bookTitle.selector])
       .pause(100);
   },
   pickAllBooksEachOfThem(browser) {
@@ -78,8 +77,67 @@ const homePageCommands = {
           element.click();
         });
         return true;
-      }, [bookTitleSelector])
+      }, [this.elements.bookTitle.selector])
       .pause(100);
+  },
+  pickByTitle(browser, title) {
+    return browser
+      .execute((selector, input) => {
+        const domBooks = document.querySelectorAll(selector);
+        for (let i = 0; i < domBooks.length; i += 1) {
+          if (domBooks[i].textContent.replace(/\s/g, '') === input) {
+            domBooks[i].click();
+            break;
+          }
+        }
+
+        return true;
+      }, [
+        this.elements.bookTitle.selector,
+        title.replace(/\s/g, ''),
+      ]);
+  },
+  increaseBookAmount(browser, title, amount) {
+    return browser
+      .execute((titleSelector, input, times) => {
+        const domBooks = document.querySelectorAll(titleSelector);
+        for (let i = 0; i < domBooks.length; i += 1) {
+          if (domBooks[i].textContent.replace(/\s/g, '') === input) {
+            const bookId = domBooks[i].attributes['data-item-id'].value;
+            const domIncrease = document.querySelector(`[data-qe="plus-amount-${bookId}"]`);
+            for (let j = 0; j < times; j += 1) {
+              domIncrease.click();
+            }
+            break;
+          }
+        }
+        return true;
+      }, [
+        this.elements.bookTitle.selector,
+        title.replace(/\s/g, ''),
+        amount,
+      ]);
+  },
+  decreaseBookAmount(browser, title, amount) {
+    return browser
+      .execute((titleSelector, input, times) => {
+        const domBooks = document.querySelectorAll(titleSelector);
+        for (let i = 0; i < domBooks.length; i += 1) {
+          if (domBooks[i].textContent.replace(/\s/g, '') === input) {
+            const bookId = domBooks[i].attributes['data-item-id'].value;
+            const domDecrease = document.querySelector(`[data-qe="minus-amount-${bookId}"]`);
+            for (let j = 0; j < times; j += 1) {
+              domDecrease.click();
+            }
+            break;
+          }
+        }
+        return true;
+      }, [
+        this.elements.bookTitle.selector,
+        title.replace(/\s/g, ''),
+        amount,
+      ]);
   },
   navigateToPayment(browser) {
     return browser
@@ -108,6 +166,9 @@ module.exports = {
       selector: '//span[@data-qe="book-title" and text()="Harry Potter and the Goblet of Fire (IV)"]',
       locateStrategy: 'xpath',
     },
+    bookTitle: {
+      selector: '[data-qe="book-title"]',
+    },
     cartDiscount: {
       selector: '//div[@data-qe="cart-discount"]/span',
       locateStrategy: 'xpath',
@@ -119,6 +180,9 @@ module.exports = {
     cartTotal: {
       selector: '//div[@data-qe="to-payment"]',
       locateStrategy: 'xpath',
+    },
+    searchBox: {
+      selector: '[data-qe="search-book"]',
     },
   },
 };

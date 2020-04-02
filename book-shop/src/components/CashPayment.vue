@@ -94,7 +94,10 @@ export default {
 console.log(change, this.txtInput);
 
       if (!this.txtInput || !change || change < 0) {
-        return this.$dialog.alert('Please fill in the correct amount', { html: true, okText: 'OK' });
+        return this.$dialog.alert(
+          '<div data-qe="not-enough-money">Please fill in the correct amount</div>',
+          { html: true, okText: 'OK' }
+        );
       }
 
       const displayChange = change > 0
