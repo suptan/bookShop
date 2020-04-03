@@ -27,6 +27,14 @@
             </span>
           </div>
         </div>
+        <div :class="`${$options.name}__change`">
+          <div>Change:</div>
+          <div
+            data-qe="cash-change"
+            :class="`${$options.name}__change__amount`"
+          >{{ calculateChange() }}</div>
+        </div>
+        <div :class="`${$options.name}__quickCash`">Quick cash payment</div>
         <div :class="`${$options.name}__macro`">
           <div
             :class="'cursor-pointer'"
@@ -104,6 +112,10 @@ export default {
     },
     normalizeCurrency(money) {
       return normalizer.THBCurrency(money);
+    },
+    calculateChange() {
+      const change = Math.max(this.txtInput - this.cart.total || 0, 0);
+      return this.normalizeCurrency(change);
     },
     paymentSuccess(cash, change = 0) {
       return this.$dialog.alert(baseTemplate, { html: true, okText: 'OK' })
