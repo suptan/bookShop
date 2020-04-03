@@ -3,6 +3,10 @@
 > my vue project for book shop
 
 ## Table of contents
+[Demo](#demo)
+
+[Repository](#repository)
+
 [Project structure](#project-structure)
 
 [Prerequisites](#prerequisites)
@@ -15,6 +19,10 @@
 ## Demo
 
 [Live Demo](https://suptantesting1.github.io)
+
+## Repository
+
+[Repository](https://github.com/suptan/bookShop/tree/master/book-shop)
 
 ## Project Structure
 
