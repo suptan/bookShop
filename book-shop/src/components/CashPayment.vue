@@ -2,49 +2,51 @@
   <div :class="`${$options.name}`"
     v-if="!isCartEmpty"
   >
-    <div :class="`${$options.name}__header`">
-      <div>
-        <span>
-          <img src="../assets/icons/cash.png" alt="cash" :class="`${$options.name}__icon`">
-        </span>
-        <span>Cash</span>
-      </div>
-      <div>{{ normalizeCurrency(cart.total) }}</div>
-    </div>
-    <div>
-      <div :class="`${$options.name}__cash`">
-        <div :class="`${$options.name}__cash__area`">
+    <div :class="`${$options.name}__container`">
+      <div :class="`${$options.name}__header`">
+        <div>
           <span>
-            <input
-              type="number"
-              placeholder="0"
-              :class="`${$options.name}__input`"
-              data-qe="input-amount"
-              v-model="txtInput"
-              @keyup.enter="onPayNow"
-            >
+            <img src="../assets/icons/cash.png" alt="cash" :class="`${$options.name}__icon`">
           </span>
+          <span>Cash</span>
+        </div>
+        <div>{{ normalizeCurrency(cart.total) }}</div>
+      </div>
+      <div>
+        <div :class="`${$options.name}__cash`">
+          <div :class="`${$options.name}__cash__area`">
+            <span>
+              <input
+                type="number"
+                placeholder="0"
+                :class="`${$options.name}__input`"
+                data-qe="input-amount"
+                v-model="txtInput"
+                @keyup.enter="onPayNow"
+              >
+            </span>
+          </div>
+        </div>
+        <div :class="`${$options.name}__macro`">
+          <div
+            :class="'cursor-pointer'"
+            @click="onClickHundredUp(cart.total)"
+            data-qe="pay-hundred-round-up"
+          >{{ normalizeCurrency(roundUp(cart.total)) }}</div>
+          <div
+            :class="'cursor-pointer'"
+            @click="onClickExact(cart.total)"
+            data-qe="pay-exact"
+          >Exact</div>
         </div>
       </div>
-      <div :class="`${$options.name}__macro`">
-        <div
-          :class="'cursor-pointer'"
-          @click="onClickHundredUp(cart.total)"
-          data-qe="pay-hundred-round-up"
-        >{{ normalizeCurrency(roundUp(cart.total)) }}</div>
-        <div
-          :class="'cursor-pointer'"
-          @click="onClickExact(cart.total)"
-          data-qe="pay-exact"
-        >Exact</div>
-      </div>
-      <div :class="`${$options.name}__footer`">
-        <div
-          :class="[`${$options.name}__submit`, 'cursor-pointer']"
-          @click="onPayNow"
-          data-qe="pay-now"
-        >Pay Now</div>
-      </div>
+    </div>
+    <div :class="`${$options.name}__footer`">
+      <div
+        :class="[`${$options.name}__submit`, 'cursor-pointer']"
+        @click="onPayNow"
+        data-qe="pay-now"
+      >Pay Now</div>
     </div>
   </div>
   <div :class="`${$options.name}`" v-else>Cart Empty</div>
@@ -77,13 +79,10 @@ export default {
   },
   methods: {
     onClickHundredUp(money) {
-      const { total } = this.cart;
-      const recieved = this.roundUp(money);
-      const change = recieved - total;
-      return this.paymentSuccess(recieved, change);
+      this.txtInput = this.roundUp(money);
     },
     onClickExact() {
-      return this.paymentSuccess(this.cart.total);
+      this.txtInput = this.cart.total;
     },
     onPayNow() {
       const { total } = this.cart;
@@ -91,7 +90,7 @@ export default {
 
       if (this.txtInput == null || change == null || change < 0) {
         return this.$dialog.alert(
-          '<div data-qe="not-enough-money">Please fill in the correct amount</div>',
+          '<div data-qe="not-enough-money">Amount not enough</div>',
           { html: true, okText: 'OK' },
         );
       }
