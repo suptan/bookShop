@@ -33,11 +33,19 @@
               >{{ book.title }}</div>
               <div>
                 <div :class="`${$options.name}__quantity`">
-                  <span @click="onClickDecrease(book.id)" :data-qe="`minus-amount-${book.id}`">
+                  <span
+                    @click="onClickDecrease(book.id)"
+                    :data-qe="`minus-amount-${book.id}`"
+                    :class="book.amount > 1 && 'cursor-pointer'"
+                  >
                     <img src="../assets/icons/minus.png" alt="minus">
                   </span>
                   <span :class="`${$options.name}__quantity__label`">{{ book.amount }}</span>
-                  <span @click="onClickIncrease(book.id)" :data-qe="`plus-amount-${book.id}`">
+                  <span
+                    @click="onClickIncrease(book.id)"
+                    :data-qe="`plus-amount-${book.id}`"
+                    :class="'cursor-pointer'"
+                  >
                     <img src="../assets/icons/plus.png" alt="plus">
                   </span>
                 </div>
