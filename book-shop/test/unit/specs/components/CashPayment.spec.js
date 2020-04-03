@@ -43,13 +43,14 @@ describe('CashPayment.vue', () => {
         await wrapper.vm.onClickHundredUp(555);
 
         expect($dialog.alert).toHaveBeenCalledWith(
-          expect.stringContaining('200.00'),
+          expect.stringContaining('Sale Complete'),
           expect.objectContaining({
             html: true,
             okText: expect.any(String),
           }));
-        expect(store.dispatch).toHaveBeenCalledWith('carts/clearCart');
-        expect(router.push).toHaveBeenCalledWith({ name: 'HomeView' });
+        expect(store.dispatch).toHaveBeenCalledWith('carts/updateChange', 200);
+        expect(store.dispatch).toHaveBeenCalledWith('carts/updateCash', 600);
+        expect(router.push).toHaveBeenCalledWith({ name: 'ThankYouView' });
       });
     });
 
@@ -63,8 +64,9 @@ describe('CashPayment.vue', () => {
             html: true,
             okText: expect.any(String),
           }));
-        expect(store.dispatch).toHaveBeenCalledWith('carts/clearCart');
-        expect(router.push).toHaveBeenCalledWith({ name: 'HomeView' });
+        expect(store.dispatch).toHaveBeenCalledWith('carts/updateChange', 0);
+        expect(store.dispatch).toHaveBeenCalledWith('carts/updateCash', 400);
+        expect(router.push).toHaveBeenCalledWith({ name: 'ThankYouView' });
       });
     });
 
@@ -75,13 +77,14 @@ describe('CashPayment.vue', () => {
         await wrapper.vm.onPayNow();
 
         expect($dialog.alert).toHaveBeenCalledWith(
-          expect.stringContaining('692.00'),
+          expect.stringContaining('Sale Complete'),
           expect.objectContaining({
             html: true,
             okText: expect.any(String),
           }));
-        expect(store.dispatch).toHaveBeenCalledWith('carts/clearCart');
-        expect(router.push).toHaveBeenCalledWith({ name: 'HomeView' });
+        expect(store.dispatch).toHaveBeenCalledWith('carts/updateChange', 692);
+        expect(store.dispatch).toHaveBeenCalledWith('carts/updateCash', txtInput);
+        expect(router.push).toHaveBeenCalledWith({ name: 'ThankYouView' });
       });
       it('should block payment when receive less than total', async () => {
         const txtInput = 92;
@@ -108,8 +111,9 @@ describe('CashPayment.vue', () => {
             html: true,
             okText: expect.any(String),
           }));
-        expect(store.dispatch).toHaveBeenCalledWith('carts/clearCart');
-        expect(router.push).toHaveBeenCalledWith({ name: 'HomeView' });
+        expect(store.dispatch).toHaveBeenCalledWith('carts/updateChange', 0);
+        expect(store.dispatch).toHaveBeenCalledWith('carts/updateCash', 400);
+        expect(router.push).toHaveBeenCalledWith({ name: 'ThankYouView' });
       });
     });
 

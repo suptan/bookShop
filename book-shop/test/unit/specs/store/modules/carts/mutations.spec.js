@@ -294,6 +294,8 @@ describe('products/mutations', () => {
         },
         subTotal: 0,
         total: 0,
+        cash: 0,
+        change: 0,
         discount: {
           books: {
             harry: {},
@@ -362,6 +364,34 @@ describe('products/mutations', () => {
       mutations.CALCULATE_DISCOUNT(state);
       expect(state.cart.total).toBe(subTotal);
       expect(state.cart.discount.amount).toBe(0);
+    });
+  });
+
+  describe('UPDATE_CHANGE', () => {
+    it('should update change in the state', () => {
+      const input = 11132;
+      const state = {
+        cart: {
+          change: 0,
+        },
+      };
+
+      mutations.UPDATE_CHANGE(state, input);
+      expect(state.cart.change).toBe(input);
+    });
+  });
+
+  describe('UPDATE_CASH', () => {
+    it('should update cash in the state', () => {
+      const input = 11132;
+      const state = {
+        cart: {
+          cash: 0,
+        },
+      };
+
+      mutations.UPDATE_CASH(state, input);
+      expect(state.cart.cash).toBe(input);
     });
   });
 });

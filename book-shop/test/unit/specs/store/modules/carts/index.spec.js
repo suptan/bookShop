@@ -10,6 +10,8 @@ describe('carts', () => {
           },
           subTotal: 0,
           total: 0,
+          cash: 0,
+          change: 0,
           discount: {
             books: {
               harry: {},

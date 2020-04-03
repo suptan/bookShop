@@ -38,6 +38,8 @@ const mockCartsActions = {
   decreaseBookInCart: jest.fn(),
   increaseBookInCart: jest.fn(),
   clearCart: jest.fn(),
+  updateChange: jest.fn(),
+  updateCash: jest.fn(),
 };
 
 const mockCartsState = {
@@ -56,6 +58,8 @@ const mockCartsState = {
     EDIT_BOOK_CART: jest.fn(),
     CLEAR_CART: jest.fn(),
     CALCULATE_DISCOUNT: jest.fn(),
+    UPDATE_CHANGE: jest.fn(),
+    UPDATE_CASH: jest.fn(),
   },
 };
 

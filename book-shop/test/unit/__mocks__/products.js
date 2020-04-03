@@ -1,3 +1,5 @@
+const mockAction = { getBooks: jest.fn() };
+
 const mockBooks = [{
   cover: 'pic1',
   price: 111,
@@ -13,7 +15,7 @@ const mockBooks = [{
 const mockProducts = {
   namespaced: true,
   state: { books: mockBooks },
-  actions: { getBooks: jest.fn() },
+  actions: mockAction,
   getters: { books: () => mockBooks },
   mutations: {
     BOOKS_UPDATED: jest.fn(() => mockBooks),
@@ -21,6 +23,7 @@ const mockProducts = {
 };
 
 export {
+  mockAction,
   mockBooks,
   mockProducts,
 };
