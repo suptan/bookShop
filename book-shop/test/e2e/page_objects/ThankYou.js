@@ -27,6 +27,13 @@ const paymentPageCommands = {
       .element('@change')
       .text.to.equal(expected);
   },
+  // End expectAssert
+  navigateToHome(browser) {
+    return browser.execute((selector) => {
+      document.querySelector(selector).click();
+      return true;
+    }, [this.elements.backToHomeBtn.selector]);
+  },
 };
 
 module.exports = {
@@ -58,6 +65,9 @@ module.exports = {
     change: {
       selector: '//div[@data-qe="change-amount"]/div[2]',
       locateStrategy: 'xpath',
+    },
+    backToHomeBtn: {
+      selector: '[data-qe="back-to-home"]',
     },
   },
 };
