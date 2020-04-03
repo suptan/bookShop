@@ -78,7 +78,7 @@
         </div>
       </div>
       <div
-        :class="isCartEmpty ? `${$options.name}__footer-disabled` : `${$options.name}__footer`"
+        :class="`${$options.name}__footer${isCartEmpty ? '-disabled' : ''}`"
         @click="navigate(cart.total)"
         data-qe="to-payment"
       >Pay ({{ normalizeCurrency(cart.total) }})</div>
