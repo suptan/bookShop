@@ -64,15 +64,32 @@ module.exports = {
   'step eight: paid over than total': (browser) => {
     const payment = browser.page.Payment();
     payment.payNow(browser, 26401);
-    payment.expectSaleCompleteDialogWithChange('฿1,185.00');
+    payment.expectSaleCompleteDialogWithOutChange();
+  },
+
+  'step nine: confirm payment and redirect to cash receipt': (browser) => {
+    const payment = browser.page.Payment();
+    const thankyou = browser.page.ThankYou();
+    payment.navigateToThankYou(browser);
+    thankyou.expectPageContainerIsPresent();
+  },
+
+  'step ten: validate sub total, discount, total, cash, and change': (browser) => {
+    const thankyou = browser.page.ThankYou();
+
+    thankyou.expectSubTotalIsCorrect('฿25,600.00');
+    thankyou.expectDiscountIsCorrect('฿384.00');
+    thankyou.expectTotalIsCorrect('฿25,216.00');
+    thankyou.expectCashIsCorrect('฿26,401.00');
+    thankyou.expectChangeIsCorrect('฿1,185.00');
+
+    browser.pause(5000);
   },
 
   'final: confirm change and redirect back to home': (browser) => {
     const home = browser.page.Home();
-    const payment = browser.page.Payment();
 
-    payment.navigateToHome(browser);
-    home.expectPageContainerIsPresent();
+    home.waitForMainElement();
 
     browser.end();
   },

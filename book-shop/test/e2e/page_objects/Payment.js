@@ -64,7 +64,7 @@ const paymentPageCommands = {
       return true;
     }, [this.elements.confirmBtn.selector]).pause(200);
   },
-  navigateToHome(browser) {
+  navigateToThankYou(browser) {
     return browser.execute((selector) => {
       document.getElementsByClassName(selector)[0].click();
       return true;
