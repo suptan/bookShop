@@ -91,9 +91,7 @@ export default {
       const { total } = this.cart;
       const change = this.txtInput - total;
 
-console.log(change, this.txtInput);
-
-      if (!this.txtInput || !change || change < 0) {
+      if (this.txtInput == null || change == null || change < 0) {
         return this.$dialog.alert(
           '<div data-qe="not-enough-money">Please fill in the correct amount</div>',
           { html: true, okText: 'OK' }
