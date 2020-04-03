@@ -30,6 +30,7 @@ module.exports = {
     const payment = browser.page.Payment();
 
     payment.payExact(browser);
+    payment.expectChangeIsCorrect();
     payment.payNow(browser);
     payment.expectSaleCompleteDialogWithOutChange();
   },

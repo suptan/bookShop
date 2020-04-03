@@ -56,14 +56,18 @@ module.exports = {
 
   'step seven: paid less than total': (browser) => {
     const payment = browser.page.Payment();
-    payment.payNow(browser, 23401);
+    payment.inputAmount(browser, 23401);
+    payment.payNow(browser);
+    payment.expectChangeIsCorrect();
     payment.expectSaleIncompleteDialog();
     payment.closeSaleIncompleteDialog(browser);
   },
 
   'step eight: paid over than total': (browser) => {
     const payment = browser.page.Payment();
-    payment.payNow(browser, 26401);
+    payment.inputAmount(browser, 26401);
+    payment.payNow(browser);
+    payment.expectChangeIsCorrect('฿1,005.00');
     payment.expectSaleCompleteDialogWithOutChange();
   },
 

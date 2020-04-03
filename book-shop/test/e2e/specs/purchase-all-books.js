@@ -24,7 +24,9 @@ module.exports = {
 
   'step five: paid with exceed amount': (browser) => {
     const payment = browser.page.Payment();
-    payment.payNow(browser, 23401);
+    payment.inputAmount(browser, 23401);
+    payment.expectChangeIsCorrect('฿15,625.00');
+    payment.payNow(browser);
     payment.expectSaleCompleteDialogWithOutChange();
   },
 

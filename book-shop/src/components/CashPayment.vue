@@ -30,7 +30,7 @@
         <div :class="`${$options.name}__change`">
           <div>Change:</div>
           <div
-            data-qe="cash-change"
+            data-qe="change-amount"
             :class="`${$options.name}__change__amount`"
           >{{ calculateChange() }}</div>
         </div>
