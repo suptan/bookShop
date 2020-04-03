@@ -142,7 +142,8 @@
     text-align: right;
 
     & > span {
-      padding-right: $space-large;
+      padding-right: 1em;
+      word-break: normal;
 
       @include mobile {
         padding-right: 0;
