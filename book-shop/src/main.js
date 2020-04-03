@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VuejsDialog from 'vuejs-dialog';
 import 'vuejs-dialog/dist/vuejs-dialog.min.css';
-import CashReceipt from '@/components/CashReceipt';
 import App from './App';
 import router from './router';
 import store from './store';
@@ -9,7 +8,6 @@ import store from './store';
 
 Vue.config.productionTip = false;
 Vue.use(VuejsDialog);
-Vue.dialog.registerComponent('cash-receipt', CashReceipt);
 
 /* eslint-disable no-new */
 new Vue({

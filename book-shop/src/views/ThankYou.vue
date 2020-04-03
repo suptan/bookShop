@@ -4,7 +4,7 @@
       <h2>Thank you</h2>
       <div :class="`${$options.name}__container`">
         <div :class="`${$options.name}__content`">
-          <div :class="`${$options.name}__shop`"><b>Little Brown Book</b></div>
+          <div :class="`${$options.name}__shop`"><b>Little Brown</b></div>
           <div
             :class="[`${$options.name}__date`, `${$options.name}__row`]"
             data-qe="receipt-date"
