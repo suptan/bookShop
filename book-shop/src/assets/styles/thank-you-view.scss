@@ -1,0 +1,85 @@
+@import '@/assets/variable.scss';
+@import '@/assets/border.scss';
+
+.ThankYouView {
+  padding-top: 20px;
+
+  &__container {
+    margin: 0 auto;
+    width: 300px;
+    border: 1px solid $border-line-section-color;
+    border-radius: $radius-small;
+    @include ripped-effect(2, 6px);
+  }
+
+  &__content {
+    background-color: $component-bg-color;
+    border-radius: $radius-small;
+
+    & > div {
+      border-bottom: 2px dashed $border-line-section-color;
+      padding: $space-small;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__itemList {
+    padding: 6px 0 !important;
+  }
+
+  &__item {
+    padding: $space-small;
+
+    &__left {
+      display: flex;
+      padding-right: $space-small;
+      justify-content: flex-start;
+
+      & > div:first-child {
+        padding-right: $space-small;
+      }
+    }
+
+    &__title {
+      text-align: left;
+    }
+  }
+
+  &__total {
+    padding-top: $space-small;
+  }
+
+  &__change {
+    padding-top: $space-small;
+  }
+
+  &__submit {
+    background-color: $main-color;
+    width: 154px;
+    padding: 0 $space-large;
+    height: $main-button-height;
+    color: $text-sub-color;
+    border-radius: $main-button-border-radius;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  &__footer {
+    padding: $space-large 0;
+
+    &__message {
+      margin: $space-medium;
+    }
+  }
+}

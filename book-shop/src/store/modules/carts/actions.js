@@ -2,7 +2,6 @@ import logger from '@/utils/logger';
 
 /**
  *
- * @param {Function} param0.commit
  * @param {import("../products").Book} book
  */
 const addBookToCart = ({ commit }, book) => {
@@ -13,7 +12,6 @@ const addBookToCart = ({ commit }, book) => {
 
 /**
  *
- * @param {Function} param0.commit
  * @param {string} id
  */
 const removeBookFromCart = ({ commit }, id) => {
@@ -24,7 +22,6 @@ const removeBookFromCart = ({ commit }, id) => {
 
 /**
  *
- * @param {Function} param0.commit
  * @param {string} id
  */
 const decreaseBookInCart = ({ commit }, id) => {
@@ -35,7 +32,6 @@ const decreaseBookInCart = ({ commit }, id) => {
 
 /**
  *
- * @param {Function} param0.commit
  * @param {string} id
  */
 const increaseBookInCart = ({ commit }, id) => {
@@ -44,13 +40,24 @@ const increaseBookInCart = ({ commit }, id) => {
   commit('CALCULATE_DISCOUNT');
 };
 
-/**
- *
- * @param {Function} param0.commit
- */
 const clearCart = ({ commit }) => {
   logger.debug('Clear items in cart');
   commit('CLEAR_CART');
+};
+
+/**
+ * @param {function():void)} param0.commit
+ * @param {number} amount
+ */
+const updateChange = ({ commit }, amount) => {
+  commit('UPDATE_CHANGE', amount);
+};
+
+/**
+ * @param {number} cash
+ */
+const updateCash = ({ commit }, cash) => {
+  commit('UPDATE_CASH', cash);
 };
 
 export default {
@@ -59,4 +66,6 @@ export default {
   decreaseBookInCart,
   increaseBookInCart,
   clearCart,
+  updateChange,
+  updateCash,
 };

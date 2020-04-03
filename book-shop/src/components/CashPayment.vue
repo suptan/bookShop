@@ -53,12 +53,11 @@
 <script>
 import { mapGetters } from 'vuex';
 import get from 'lodash.get';
-import normalizer from '@/utils/normalizer';
 import router from '@/router';
 import store from '@/store';
+import normalizer from '@/utils/normalizer';
 
 const baseTemplate = '<div data-qe="sale-complete"><b>Sale Complete</b></div>';
-const changeTemplate = '<br><div data-qe="change-amount">Change: $0</div>';
 
 export default {
   name: 'CashPayment',
@@ -81,11 +80,10 @@ export default {
       const { total } = this.cart;
       const recieved = this.roundUp(money);
       const change = recieved - total;
-      const message = baseTemplate + changeTemplate.replace('$0', normalizer.THBCurrency(change));
-      return this.paymentSuccess(message);
+      return this.paymentSuccess(recieved, change);
     },
     onClickExact() {
-      return this.paymentSuccess(baseTemplate);
+      return this.paymentSuccess(this.cart.total);
     },
     onPayNow() {
       const { total } = this.cart;
@@ -98,11 +96,7 @@ export default {
         );
       }
 
-      const displayChange = change > 0
-        ? changeTemplate.replace('$0', normalizer.THBCurrency(change))
-        : '';
-      const message = baseTemplate + displayChange;
-      return this.paymentSuccess(message);
+      return this.paymentSuccess(this.txtInput, change);
     },
     roundUp(money) {
       if (!money) return -1;
@@ -111,11 +105,12 @@ export default {
     normalizeCurrency(money) {
       return normalizer.THBCurrency(money);
     },
-    paymentSuccess(message) {
-      return this.$dialog.alert(message, { html: true, okText: 'OK' })
+    paymentSuccess(cash, change = 0) {
+      return this.$dialog.alert(baseTemplate, { html: true, okText: 'OK' })
         .then(() => {
-          store.dispatch('carts/clearCart');
-          router.push({ name: 'HomeView' });
+          store.dispatch('carts/updateChange', change);
+          store.dispatch('carts/updateCash', cash);
+          router.push({ name: 'ThankYouView' });
         });
     },
   },
