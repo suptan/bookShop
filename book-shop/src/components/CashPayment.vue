@@ -42,10 +42,12 @@
             data-qe="pay-hundred-round-up"
           >{{ normalizeCurrency(roundUp(cart.total)) }}</div>
           <div
-            :class="'cursor-pointer'"
+            :class="[`${$options.name}__exact`, 'cursor-pointer']"
             @click="onClickExact(cart.total)"
             data-qe="pay-exact"
-          >Exact</div>
+          >
+            <div>Exact</div>
+          </div>
         </div>
       </div>
     </div>

@@ -81,6 +81,12 @@
     }
   }
 
+  &__exact {
+    & > div {
+      margin-top: 1px;
+    }
+  }
+
   &__submit {
     background-color: $main-color;
     padding: 0 $space-large;
