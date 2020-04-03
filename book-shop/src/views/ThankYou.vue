@@ -15,7 +15,7 @@
           <div :class="`${$options.name}__itemList`">
             <div
               :class="[`${$options.name}__row`, `${$options.name}__item`]"
-              v-for="book in item.books"
+              v-for="book in paidItems"
               :key="book.id"
               :data-qe="`item-id-${book.id}`"
             >
@@ -99,12 +99,15 @@ export default {
       cart: 'carts/cart',
       item: 'carts/item',
     }),
+    paidItems() {
+      return this.item.books.filter(book => book.amount > 0);
+    },
   },
   created() {
     this.countDownTimer();
   },
   mounted() {
-    setTimeout(() => this.navigateToHome(), 5000);
+    // setTimeout(() => this.navigateToHome(), 5000);
   },
   methods: {
     countDownTimer() {
