@@ -17,7 +17,7 @@ const paymentPageCommands = {
   },
   expectSaleIncompleteDialog() {
     return this.expect.element('@payFailed')
-      .text.to.equal('Please fill in the correct amount');
+      .text.to.equal('Amount not enough');
   },
   // End expectAssert
   payHundredRoundUp(browser) {
@@ -47,9 +47,11 @@ const paymentPageCommands = {
     //     amount);
 
     return browser.execute((inputSelector, payNowSelector, input) => {
-      const domInputElement = document.querySelector(inputSelector);
-      domInputElement.value = input;
-      domInputElement.dispatchEvent(new Event('input'));
+      if (input != null) {
+        const domInputElement = document.querySelector(inputSelector);
+        domInputElement.value = input;
+        domInputElement.dispatchEvent(new Event('input'));
+      }
       document.querySelector(payNowSelector).click();
       return true;
     }, [

@@ -31,6 +31,7 @@ module.exports = {
   'step five: paid with round up 2 digits': (browser) => {
     const payment = browser.page.Payment();
     payment.payHundredRoundUp(browser);
+    payment.payNow(browser);
     payment.expectSaleCompleteDialogWithOutChange();
   },
 

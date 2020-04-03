@@ -4,7 +4,7 @@
  */
 const homePageCommands = {
   // expectAssert
-  assertTitleIsCorrect(expected = 'Little Brown Book') {
+  assertTitleIsCorrect(expected = 'Little Brown') {
     return this.assert.title(expected);
   },
   waitForMainElement() {
