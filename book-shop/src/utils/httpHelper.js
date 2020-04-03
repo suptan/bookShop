@@ -13,8 +13,9 @@ function generateProxyUrl(url) {
 }
 
 /**
- * @param {Object} param0
- * @param {string} param0.path
+ * Create request with GET method to server with given url.
+ * If the request encounter CORS will retry with proxy (once).
+ * @param {string} url
  */
 async function getRequest(url) {
   const option = {
