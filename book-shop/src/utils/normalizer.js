@@ -1,6 +1,7 @@
 /**
- *
+ * Convert given number to string Thai Baht currency format
  * @param {number} money
+ * @returns {string}
  */
 function THBCurrency(money = 0) {
   const amount = typeof money === 'undefined' ? 0 : money;

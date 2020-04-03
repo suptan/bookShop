@@ -3,6 +3,10 @@
 > my vue project for book shop
 
 ## Table of contents
+[Demo](#demo)
+
+[Repository](#repository)
+
 [Project structure](#project-structure)
 
 [Prerequisites](#prerequisites)
@@ -15,6 +19,10 @@
 ## Demo
 
 [Live Demo](https://suptantesting1.github.io)
+
+## Repository
+
+[Repository](https://github.com/suptan/bookShop/tree/master/book-shop)
 
 ## Project Structure
 
@@ -51,6 +59,11 @@ Make sure you have installed all of the following prerequisites on your developm
 * Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager. If you encounter any problems, you can also use this [GitHub Gist](https://gist.github.com/isaacs/579814) to install Node.js.
 
 ## Build Setup
+
+Make sure you go inside project folder
+```
+$ npm cd book-shop/
+```
 
 ``` bash
 # install dependencies

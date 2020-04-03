@@ -1,17 +1,20 @@
 <template>
-  <div :class="`${$options.name}`">
+  <div :class="`${$options.name}`" data-qe="product-list">
     <div :class="`${$options.name}__header`">
-      <search-area />
+      <search-area data-qe="search-book" />
     </div>
     <div :class="`${$options.name}__content`">
       <product-list-item v-for="book in books"
-      :key="book.id"
-      :book="book"
+        :key="book.id"
+        :book="book"
       />
       <div :class="`${$options.name}__spinner`" v-if="isFetchBooks">
         <div :class="'spinner'"></div>
       </div>
-      <div v-if="(!books || books.length === 0) && !isFetchBooks">No Books</div>
+      <div
+        v-if="(!books || books.length === 0) && !isFetchBooks"
+        data-qe="no-book"
+      >No Book</div>
     </div>
   </div>
 </template>

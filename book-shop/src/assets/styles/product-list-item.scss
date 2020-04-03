@@ -21,6 +21,10 @@
     display: flex;
     padding: 0 $space-large;
 
+    & > img {
+      width: 132px;
+    }
+
     @include mobile {
       padding: 0;
       & > img {
@@ -36,13 +40,17 @@
     width: 100%;
 
     @include mobile {
+      flex-grow: 1;
       width: fit-content;
     }
   }
 
   &__title {
+    text-align: left;
+
     @include mobile {
-      max-width: 150px;
+      flex-grow: 1;
+      margin: 0 $space-medium;
     }
   }
 

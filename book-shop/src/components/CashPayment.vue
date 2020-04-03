@@ -19,6 +19,7 @@
               type="number"
               placeholder="0"
               :class="`${$options.name}__input`"
+              data-qe="input-amount"
               v-model="txtInput"
               @keyup.enter="onPayNow"
             >
@@ -29,11 +30,20 @@
         <div
           :class="'cursor-pointer'"
           @click="onClickHundredUp(cart.total)"
+          data-qe="pay-hundred-round-up"
         >{{ normalizeCurrency(roundUp(cart.total)) }}</div>
-        <div :class="'cursor-pointer'" @click="onClickExact(cart.total)">Exact</div>
+        <div
+          :class="'cursor-pointer'"
+          @click="onClickExact(cart.total)"
+          data-qe="pay-exact"
+        >Exact</div>
       </div>
       <div :class="`${$options.name}__footer`">
-        <div :class="[`${$options.name}__submit`, 'cursor-pointer']" @click="onPayNow">Pay Now</div>
+        <div
+          :class="[`${$options.name}__submit`, 'cursor-pointer']"
+          @click="onPayNow"
+          data-qe="pay-now"
+        >Pay Now</div>
       </div>
     </div>
   </div>
@@ -47,8 +57,8 @@ import normalizer from '@/utils/normalizer';
 import router from '@/router';
 import store from '@/store';
 
-const baseTemplate = '<div><b>Sale complete</b></div>';
-const changeTemplate = '<br><div>Change: $0</div>';
+const baseTemplate = '<div data-qe="sale-complete"><b>Sale Complete</b></div>';
+const changeTemplate = '<br><div data-qe="change-amount">Change: $0</div>';
 
 export default {
   name: 'CashPayment',
@@ -81,8 +91,11 @@ export default {
       const { total } = this.cart;
       const change = this.txtInput - total;
 
-      if (change < 0) {
-        return this.$dialog.alert('Please fill in the correct amount', { html: true, okText: 'OK' });
+      if (this.txtInput == null || change == null || change < 0) {
+        return this.$dialog.alert(
+          '<div data-qe="not-enough-money">Please fill in the correct amount</div>',
+          { html: true, okText: 'OK' },
+        );
       }
 
       const displayChange = change > 0

@@ -6,7 +6,11 @@
       </div>
       <div :class="`${$options.name}__content`">
         <div :class="[`${$options.name}__row`, `${$options.name}__thead`]">
-            <div @click="onClickRemoveAll()" :class="'cursor-pointer'">
+            <div
+              @click="onClickRemoveAll()"
+              :class="'cursor-pointer'"
+              data-qe="clear-all"
+            >
               <img src="../assets/icons/delete.png" alt="delete">
             </div>
             <div>Name</div>
@@ -15,17 +19,25 @@
         </div>
         <div :class="[`${$options.name}__list`]">
           <div :class="[`${$options.name}__row`]" v-for="book in item.books" :key="book.id">
-              <div @click="onClickRemove(book.id)" :class="'cursor-pointer'">
+              <div
+                @click="onClickRemove(book.id)"
+                :class="'cursor-pointer'"
+                :data-qe="`remove-${book.id}`"
+              >
                 <img src="../assets/icons/delete.png" alt="delete">
               </div>
-              <div :class="`${$options.name}__label`">{{ book.title }}</div>
+              <div
+                :class="`${$options.name}__label`"
+                :data-item-id="book.id"
+                data-qe="cart-book-title"
+              >{{ book.title }}</div>
               <div>
                 <div :class="`${$options.name}__quantity`">
-                  <span @click="onClickDecrease(book.id)">
+                  <span @click="onClickDecrease(book.id)" :data-qe="`minus-amount-${book.id}`">
                     <img src="../assets/icons/minus.png" alt="minus">
                   </span>
                   <span :class="`${$options.name}__quantity__label`">{{ book.amount }}</span>
-                  <span @click="onClickIncrease(book.id)">
+                  <span @click="onClickIncrease(book.id)" :data-qe="`plus-amount-${book.id}`">
                     <img src="../assets/icons/plus.png" alt="plus">
                   </span>
                 </div>
@@ -43,7 +55,7 @@
               <div></div>
               <div :class="`${$options.name}__label`">Discount</div>
               <div></div>
-              <div :class="`${$options.name}__price`">
+              <div :class="`${$options.name}__price`" data-qe="cart-discount">
                 <span>{{ normalizeCurrency(cart.discount.amount) }}</span>
               </div>
             </div>
@@ -51,7 +63,7 @@
               <div></div>
               <div :class="`${$options.name}__label`">Sub Total</div>
               <div></div>
-              <div :class="`${$options.name}__price`">
+              <div :class="`${$options.name}__price`" data-qe="cart-sub-total">
                 <span>{{ normalizeCurrency(cart.subTotal) }}</span>
               </div>
             </div>
@@ -60,6 +72,7 @@
       <div
         :class="`${$options.name}__footer`"
         @click="navigate(cart.total)"
+        data-qe="to-payment"
       >Pay ({{ normalizeCurrency(cart.total) }})</div>
     </div>
   </div>

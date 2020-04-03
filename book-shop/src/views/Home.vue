@@ -7,7 +7,7 @@
           <product-list />
         </div>
         <div :class="`${$options.name}__cart`"><cart /></div>
-        <div :class="`${$options.name}__cart__mobile`" v-show="isShow">
+        <div :class="`${$options.name}__cart__mobile`" v-if="isShow">
           <span :class="`${$options.name}__header__close`" @click="isShow = false">X</span>
           <cart />
         </div>

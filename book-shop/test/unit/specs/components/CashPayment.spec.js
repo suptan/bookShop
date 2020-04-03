@@ -89,7 +89,7 @@ describe('CashPayment.vue', () => {
         await wrapper.vm.onPayNow();
 
         expect($dialog.alert).toHaveBeenCalledWith(
-          'Please fill in the correct amount',
+          expect.stringContaining('Please fill in the correct amount'),
           expect.objectContaining({
             html: true,
             okText: expect.any(String),
@@ -103,7 +103,7 @@ describe('CashPayment.vue', () => {
         await wrapper.vm.onPayNow();
 
         expect($dialog.alert).toHaveBeenCalledWith(
-          '<div><b>Sale complete</b></div>',
+          expect.stringContaining('Sale Complete'),
           expect.objectContaining({
             html: true,
             okText: expect.any(String),
