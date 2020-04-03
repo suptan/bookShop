@@ -100,7 +100,8 @@ export default {
     },
     roundUp(money) {
       if (!money) return -1;
-      return Math.ceil(Math.ceil(money / 10) / 10) * 100;
+      const pow = money % 100 === 0 ? 1000 : 100;
+      return Math.ceil(money / pow) * pow;
     },
     normalizeCurrency(money) {
       return normalizer.THBCurrency(money);
