@@ -107,7 +107,7 @@ export default {
     this.countDownTimer();
   },
   mounted() {
-    // setTimeout(() => this.navigateToHome(), 5000);
+    setTimeout(() => this.navigateToHome(), 5000);
   },
   methods: {
     countDownTimer() {
