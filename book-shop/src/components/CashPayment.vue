@@ -94,7 +94,7 @@ export default {
       if (this.txtInput == null || change == null || change < 0) {
         return this.$dialog.alert(
           '<div data-qe="not-enough-money">Please fill in the correct amount</div>',
-          { html: true, okText: 'OK' }
+          { html: true, okText: 'OK' },
         );
       }
 

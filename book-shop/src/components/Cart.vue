@@ -19,7 +19,11 @@
         </div>
         <div :class="[`${$options.name}__list`]">
           <div :class="[`${$options.name}__row`]" v-for="book in item.books" :key="book.id">
-              <div @click="onClickRemove(book.id)" :class="'cursor-pointer'" :data-qe="`remove-${book.id}`">
+              <div
+                @click="onClickRemove(book.id)"
+                :class="'cursor-pointer'"
+                :data-qe="`remove-${book.id}`"
+              >
                 <img src="../assets/icons/delete.png" alt="delete">
               </div>
               <div
