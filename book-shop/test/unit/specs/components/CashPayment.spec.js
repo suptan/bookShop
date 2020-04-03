@@ -2,13 +2,17 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import router from '@/router';
 import store from '@/store';
+import normalizer from '@/utils/normalizer';
 import CashPayment from '@/components/CashPayment';
 import { createStoreMocks } from '../../__mocks__';
-
 
 jest.mock('@/store', () => ({
   dispatch: jest.fn(),
 }));
+jest.mock('@/utils/normalizer', () => ({
+  THBCurrency: jest.fn(),
+}));
+
 const localVue = createLocalVue();
 
 localVue.use(Vuex);
@@ -40,14 +44,14 @@ describe('CashPayment.vue', () => {
   describe('Methods', () => {
     describe('onClickHundredUp()', () => {
       it('should', async () => {
-        await wrapper.vm.onClickHundredUp(555);
+        wrapper.vm.onClickHundredUp(555);
         expect(wrapper.vm.txtInput).toBe(600);
       });
     });
 
     describe('onClickExact()', () => {
       it('should', async () => {
-        await wrapper.vm.onClickExact();
+        wrapper.vm.onClickExact();
         expect(wrapper.vm.txtInput).toBe(400);
       });
     });
@@ -103,6 +107,27 @@ describe('CashPayment.vue', () => {
       it('should be able to handle invalid param', () => {
         const result = wrapper.vm.roundUp();
         expect(result).toBe(-1);
+      });
+    });
+
+    describe('calculateChange', () => {
+      it('should return 0 when not input any amount', () => {
+        wrapper.vm.calculateChange();
+        expect(normalizer.THBCurrency).toHaveBeenCalledWith(0);
+      });
+
+      it('should return 0 when input amount less that total', () => {
+        const txtInput = 10;
+        wrapper.setData({ txtInput });
+        wrapper.vm.calculateChange();
+        expect(normalizer.THBCurrency).toHaveBeenCalledWith(0);
+      });
+
+      it('should return correct change from given amount', () => {
+        const txtInput = 571;
+        wrapper.setData({ txtInput });
+        wrapper.vm.calculateChange();
+        expect(normalizer.THBCurrency).toHaveBeenCalledWith(171);
       });
     });
   });
