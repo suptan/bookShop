@@ -45,8 +45,8 @@ module.exports = {
   'step five: discount and price display correctly': (browser) => {
     const home = browser.page.Home();
     home.expectDiscountIsCorrect('฿384.00');
-    home.expectSubTotalIsCorrect('฿25,600.00');
-    home.expectTotalIsCorrect('฿25,216.00');
+    home.expectSubTotalIsCorrect('฿25,780.00');
+    home.expectTotalIsCorrect('฿25,396.00');
   },
 
   'step six: process checkout': (browser) => {
@@ -76,11 +76,11 @@ module.exports = {
     const thankyou = browser.page.ThankYou();
 
     thankyou.expectPageContainerIsPresent();
-    thankyou.expectSubTotalIsCorrect('฿25,600.00');
+    thankyou.expectSubTotalIsCorrect('฿25,780.00');
     thankyou.expectDiscountIsCorrect('฿384.00');
-    thankyou.expectTotalIsCorrect('฿25,216.00');
+    thankyou.expectTotalIsCorrect('฿25,396.00');
     thankyou.expectCashIsCorrect('฿26,401.00');
-    thankyou.expectChangeIsCorrect('฿1,185.00');
+    thankyou.expectChangeIsCorrect('฿1,005.00');
     browser.pause(2000);
   },
 

@@ -244,8 +244,8 @@ describe('products/mutations', () => {
       mutations.DECREASE_BOOK_IN_CART(state, id);
       mutations.DECREASE_BOOK_IN_CART(state, id);
 
-      expect(state.cart.subTotal).toEqual(800);
-      expect(state.cart.item.books[0].amount).toEqual(0);
+      expect(state.cart.subTotal).toEqual(900);
+      expect(state.cart.item.books[0].amount).toEqual(1);
       expect(state.cart.item.books[1].amount).toEqual(2);
     });
 

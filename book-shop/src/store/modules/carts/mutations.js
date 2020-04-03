@@ -57,7 +57,7 @@ const DECREASE_BOOK_IN_CART = (state, id) => {
   const index = state.cart.item.books.map(b => b.id).indexOf(id);
   const book = state.cart.item.books[index];
 
-  if (!book || book.amount < 1) return;
+  if (!book || book.amount < 2) return;
 
   book.amount -= 1;
   book.total -= book.price;
