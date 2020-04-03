@@ -56,7 +56,7 @@
           </div>
           <div
             :class="`${$options.name}__empty`"
-            v-if="!item.books || item.books.length === 0">CART IS EMPTY</div>
+            v-if="isCartEmpty">CART IS EMPTY</div>
         </div>
         <div :class="[`${$options.name}__breakdown`]">
             <div :class="`${$options.name}__row`">
@@ -78,7 +78,7 @@
         </div>
       </div>
       <div
-        :class="`${$options.name}__footer`"
+        :class="isCartEmpty ? `${$options.name}__footer-disabled` : `${$options.name}__footer`"
         @click="navigate(cart.total)"
         data-qe="to-payment"
       >Pay ({{ normalizeCurrency(cart.total) }})</div>
@@ -98,6 +98,10 @@ export default {
       cart: 'carts/cart',
       item: 'carts/item',
     }),
+    isCartEmpty() {
+      const { item: { books } } = this;
+      return !books || books.length === 0;
+    },
   },
   methods: {
     onClickDecrease(id) {
