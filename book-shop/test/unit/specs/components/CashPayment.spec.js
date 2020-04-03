@@ -41,32 +41,14 @@ describe('CashPayment.vue', () => {
     describe('onClickHundredUp()', () => {
       it('should', async () => {
         await wrapper.vm.onClickHundredUp(555);
-
-        expect($dialog.alert).toHaveBeenCalledWith(
-          expect.stringContaining('Sale Complete'),
-          expect.objectContaining({
-            html: true,
-            okText: expect.any(String),
-          }));
-        expect(store.dispatch).toHaveBeenCalledWith('carts/updateChange', 200);
-        expect(store.dispatch).toHaveBeenCalledWith('carts/updateCash', 600);
-        expect(router.push).toHaveBeenCalledWith({ name: 'ThankYouView' });
+        expect(wrapper.vm.txtInput).toBe(600);
       });
     });
 
     describe('onClickExact()', () => {
       it('should', async () => {
         await wrapper.vm.onClickExact();
-
-        expect($dialog.alert).toHaveBeenCalledWith(
-          expect.any(String),
-          expect.objectContaining({
-            html: true,
-            okText: expect.any(String),
-          }));
-        expect(store.dispatch).toHaveBeenCalledWith('carts/updateChange', 0);
-        expect(store.dispatch).toHaveBeenCalledWith('carts/updateCash', 400);
-        expect(router.push).toHaveBeenCalledWith({ name: 'ThankYouView' });
+        expect(wrapper.vm.txtInput).toBe(400);
       });
     });
 
@@ -92,7 +74,7 @@ describe('CashPayment.vue', () => {
         await wrapper.vm.onPayNow();
 
         expect($dialog.alert).toHaveBeenCalledWith(
-          expect.stringContaining('Please fill in the correct amount'),
+          expect.stringContaining('Amount not enough'),
           expect.objectContaining({
             html: true,
             okText: expect.any(String),
