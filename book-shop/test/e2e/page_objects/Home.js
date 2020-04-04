@@ -4,7 +4,7 @@
  */
 const homePageCommands = {
   // expectAssert
-  assertTitleIsCorrect(expected = 'book-shop') {
+  assertTitleIsCorrect(expected = 'Little Brown') {
     return this.assert.title(expected);
   },
   waitForMainElement() {
@@ -140,11 +140,16 @@ const homePageCommands = {
       ]);
   },
   navigateToPayment(browser) {
-    return browser
-      .execute(() => {
-        document.querySelector('[data-qe="to-payment"]').click();
-        return true;
-      }, []).pause(200);
+    // return browser
+    //   .execute((selector) => {
+    //     document.querySelector(selector).click();
+    //     return true;
+    //   }, [this.elements.cartTotal.querySelector]).pause(200);
+    this
+      .waitForElementVisible("[data-qe='to-payment']", 1000)
+      .click("[data-qe='to-payment']");
+
+    return browser.pause(1000);
   },
 };
 
@@ -178,6 +183,7 @@ module.exports = {
       locateStrategy: 'xpath',
     },
     cartTotal: {
+      querySelector: "[data-qe='to-payment']",
       selector: '//div[@data-qe="to-payment"]',
       locateStrategy: 'xpath',
     },

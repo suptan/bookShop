@@ -33,11 +33,19 @@
               >{{ book.title }}</div>
               <div>
                 <div :class="`${$options.name}__quantity`">
-                  <span @click="onClickDecrease(book.id)" :data-qe="`minus-amount-${book.id}`">
+                  <span
+                    @click="onClickDecrease(book.id)"
+                    :data-qe="`minus-amount-${book.id}`"
+                    :class="book.amount > 1 && 'cursor-pointer'"
+                  >
                     <img src="../assets/icons/minus.png" alt="minus">
                   </span>
                   <span :class="`${$options.name}__quantity__label`">{{ book.amount }}</span>
-                  <span @click="onClickIncrease(book.id)" :data-qe="`plus-amount-${book.id}`">
+                  <span
+                    @click="onClickIncrease(book.id)"
+                    :data-qe="`plus-amount-${book.id}`"
+                    :class="'cursor-pointer'"
+                  >
                     <img src="../assets/icons/plus.png" alt="plus">
                   </span>
                 </div>
@@ -48,7 +56,7 @@
           </div>
           <div
             :class="`${$options.name}__empty`"
-            v-if="!item.books || item.books.length === 0">CART IS EMPTY</div>
+            v-if="isCartEmpty">CART IS EMPTY</div>
         </div>
         <div :class="[`${$options.name}__breakdown`]">
             <div :class="`${$options.name}__row`">
@@ -70,7 +78,7 @@
         </div>
       </div>
       <div
-        :class="`${$options.name}__footer`"
+        :class="`${$options.name}__footer${isCartEmpty ? '-disabled' : ''}`"
         @click="navigate(cart.total)"
         data-qe="to-payment"
       >Pay ({{ normalizeCurrency(cart.total) }})</div>
@@ -90,6 +98,10 @@ export default {
       cart: 'carts/cart',
       item: 'carts/item',
     }),
+    isCartEmpty() {
+      const { item: { books } } = this;
+      return !books || books.length === 0;
+    },
   },
   methods: {
     onClickDecrease(id) {

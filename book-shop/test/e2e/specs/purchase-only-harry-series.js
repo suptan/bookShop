@@ -45,8 +45,8 @@ module.exports = {
   'step five: discount and price display correctly': (browser) => {
     const home = browser.page.Home();
     home.expectDiscountIsCorrect('฿384.00');
-    home.expectSubTotalIsCorrect('฿25,600.00');
-    home.expectTotalIsCorrect('฿25,216.00');
+    home.expectSubTotalIsCorrect('฿25,780.00');
+    home.expectTotalIsCorrect('฿25,396.00');
   },
 
   'step six: process checkout': (browser) => {
@@ -56,23 +56,42 @@ module.exports = {
 
   'step seven: paid less than total': (browser) => {
     const payment = browser.page.Payment();
-    payment.payNow(browser, 23401);
+    payment.inputAmount(browser, 23401);
+    payment.payNow(browser);
+    payment.expectChangeIsCorrect();
     payment.expectSaleIncompleteDialog();
     payment.closeSaleIncompleteDialog(browser);
   },
 
   'step eight: paid over than total': (browser) => {
     const payment = browser.page.Payment();
-    payment.payNow(browser, 26401);
-    payment.expectSaleCompleteDialogWithChange('฿1,185.00');
+    payment.inputAmount(browser, 26401);
+    payment.payNow(browser);
+    payment.expectChangeIsCorrect('฿1,005.00');
+    payment.expectSaleCompleteDialogWithOutChange();
+  },
+
+  'step nine: confirm payment and redirect to cash receipt': (browser) => {
+    const payment = browser.page.Payment();
+    payment.navigateToThankYou(browser);
+  },
+
+  'step ten: validate sub total, discount, total, cash, and change': (browser) => {
+    const thankyou = browser.page.ThankYou();
+
+    thankyou.expectPageContainerIsPresent();
+    thankyou.expectSubTotalIsCorrect('฿25,780.00');
+    thankyou.expectDiscountIsCorrect('฿384.00');
+    thankyou.expectTotalIsCorrect('฿25,396.00');
+    thankyou.expectCashIsCorrect('฿26,401.00');
+    thankyou.expectChangeIsCorrect('฿1,005.00');
+    browser.pause(2000);
   },
 
   'final: confirm change and redirect back to home': (browser) => {
     const home = browser.page.Home();
-    const payment = browser.page.Payment();
 
-    payment.navigateToHome(browser);
-    home.expectPageContainerIsPresent();
+    home.waitForMainElement();
 
     browser.end();
   },

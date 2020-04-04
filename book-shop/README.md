@@ -1,6 +1,6 @@
 # book-shop
 
-> my vue project for book shop
+> my vue project for Little Brown Book Shop
 
 ## Table of contents
 [Demo](#demo)
@@ -46,6 +46,9 @@ src/
 |          |- getters.js
 |          |- index.js
 |          |- mutations.js
+|        .
+|        .
+|        .
 |- utils/ ____________________________ # Utilities Functions
 |- views/ ____________________________ # Application Pages
 |- App.vue ___________________________ # Application Entry
@@ -60,7 +63,7 @@ Make sure you have installed all of the following prerequisites on your developm
 
 ## Build Setup
 
-Make sure you go inside project folder
+Make sure you go inside project folder before execute any command below
 ```
 $ npm cd book-shop/
 ```

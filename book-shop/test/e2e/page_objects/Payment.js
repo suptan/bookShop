@@ -2,22 +2,16 @@ const paymentPageCommands = {
   expectSaleCompleteDialogWithOutChange() {
     return this.expect
       .element('@saleComplete')
-      .text.to.equal('Sale Complete')
-      && this.expect
-        .element('@changeAmount')
-        .to.be.not.present;
-  },
-  expectSaleCompleteDialogWithChange(expected = '฿1.00') {
-    return this.expect
-      .element('@saleComplete')
-      .text.to.equal('Sale Complete')
-      && this.expect
-        .element('@changeAmount')
-        .text.to.contain(expected);
+      .text.to.equal('Sale Complete');
   },
   expectSaleIncompleteDialog() {
     return this.expect.element('@payFailed')
-      .text.to.equal('Please fill in the correct amount');
+      .text.to.equal('Amount not enough');
+  },
+  expectChangeIsCorrect(expected = '฿0.00') {
+    return this.expect
+      .element('@changeAmount')
+      .text.to.equal(expected);
   },
   // End expectAssert
   payHundredRoundUp(browser) {
@@ -38,7 +32,7 @@ const paymentPageCommands = {
   /**
    * @param {number} amount
    */
-  payNow(browser, amount) {
+  payNow(browser) {
     // this
     //   .setValue(
     //     'xpath',
@@ -46,15 +40,22 @@ const paymentPageCommands = {
     //     // '@inputAmount',
     //     amount);
 
-    return browser.execute((inputSelector, payNowSelector, input) => {
-      const domInputElement = document.querySelector(inputSelector);
-      domInputElement.value = input;
-      domInputElement.dispatchEvent(new Event('input'));
+    return browser.execute((payNowSelector) => {
       document.querySelector(payNowSelector).click();
+      return true;
+    }, [this.elements.payNow.selector])
+      .pause(100);
+  },
+  inputAmount(browser, amount) {
+    return browser.execute((inputSelector, input) => {
+      if (input != null) {
+        const domInputElement = document.querySelector(inputSelector);
+        domInputElement.value = input;
+        domInputElement.dispatchEvent(new Event('input'));
+      }
       return true;
     }, [
       this.elements.inputAmount.selector,
-      this.elements.payNow.selector,
       amount])
       .pause(100);
   },
@@ -64,7 +65,7 @@ const paymentPageCommands = {
       return true;
     }, [this.elements.confirmBtn.selector]).pause(200);
   },
-  navigateToHome(browser) {
+  navigateToThankYou(browser) {
     return browser.execute((selector) => {
       document.getElementsByClassName(selector)[0].click();
       return true;

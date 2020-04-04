@@ -17,6 +17,10 @@ const routes = [{
   path: '/payment',
   name: 'PaymentView',
   component: () => import(/* webpackPrefetch: true */'@/views/Payment'),
+}, {
+  path: '/thank-you',
+  name: 'ThankYouView',
+  component: () => import(/* webpackPrefetch: true */'@/views/ThankYou'),
 }];
 
 export default new Router({

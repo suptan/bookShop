@@ -57,7 +57,7 @@ const DECREASE_BOOK_IN_CART = (state, id) => {
   const index = state.cart.item.books.map(b => b.id).indexOf(id);
   const book = state.cart.item.books[index];
 
-  if (!book || book.amount < 1) return;
+  if (!book || book.amount < 2) return;
 
   book.amount -= 1;
   book.total -= book.price;
@@ -107,6 +107,8 @@ const CLEAR_CART = (state) => {
     },
     subTotal: 0,
     total: 0,
+    change: 0,
+    cash: 0,
     discount: {
       books: {
         harry: {},
@@ -141,6 +143,24 @@ const CALCULATE_DISCOUNT = (state) => {
   state.cart.discount.amount = discountAmount;
 };
 
+/**
+ *
+ * @param {import('.').CartState} state
+ * @param {number} amount
+ */
+const UPDATE_CHANGE = (state, amount) => {
+  state.cart.change = amount;
+};
+
+/**
+ *
+ * @param {import('.').CartState} state
+ * @param {number} amount
+ */
+const UPDATE_CASH = (state, amount) => {
+  state.cart.cash = amount;
+};
+
 export default {
   ADD_TO_CART,
   REMOVE_FROM_CART,
@@ -149,4 +169,6 @@ export default {
   EDIT_BOOK_CART,
   CLEAR_CART,
   CALCULATE_DISCOUNT,
+  UPDATE_CHANGE,
+  UPDATE_CASH,
 };

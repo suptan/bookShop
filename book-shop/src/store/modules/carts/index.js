@@ -41,13 +41,14 @@ const state = {
     },
     subTotal: 0,
     total: 0,
+    change: 0,
+    cash: 0,
     discount: {
       books: {
         harry: {},
       },
       amount: 0,
     },
-
   },
 };
 

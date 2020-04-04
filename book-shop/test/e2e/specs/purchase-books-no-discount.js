@@ -30,14 +30,31 @@ module.exports = {
     const payment = browser.page.Payment();
 
     payment.payExact(browser);
+    payment.expectChangeIsCorrect();
+    payment.payNow(browser);
     payment.expectSaleCompleteDialogWithOutChange();
+  },
+
+  'step five: confirm payment and redirect to cash receipt': (browser) => {
+    const payment = browser.page.Payment();
+    payment.navigateToThankYou(browser);
+  },
+
+  'step six: validate sub total, discount, total, cash, and change': (browser) => {
+    const thankyou = browser.page.ThankYou();
+
+    thankyou.expectPageContainerIsPresent();
+    thankyou.expectSubTotalIsCorrect('฿1,190.00');
+    thankyou.expectDiscountIsCorrect('฿0.00');
+    thankyou.expectTotalIsCorrect('฿1,190.00');
+    thankyou.expectCashIsCorrect('฿1,190.00');
+    thankyou.expectChangeIsCorrect('฿0.00');
+    thankyou.navigateToHome(browser);
   },
 
   'final: redirect back to Landing page': (browser) => {
     const home = browser.page.Home();
-    const payment = browser.page.Payment();
 
-    payment.navigateToHome(browser);
     home.expectPageContainerIsPresent();
 
     browser.end();

@@ -129,6 +129,12 @@
     border-radius: 0 0 $space-small $space-small;
     cursor: pointer;
 
+    &-disabled {
+      @extend .Cart__footer;
+      opacity: 0.5;
+      cursor: default;
+    }
+
     @include mobile {
       border-radius: 0;
     }

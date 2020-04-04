@@ -30,17 +30,32 @@ module.exports = {
 
   'step five: paid with round up 2 digits': (browser) => {
     const payment = browser.page.Payment();
-
     payment.payHundredRoundUp(browser);
+    payment.expectChangeIsCorrect('฿75.00');
+    payment.payNow(browser);
+    payment.expectSaleCompleteDialogWithOutChange();
+  },
 
-    payment.expectSaleCompleteDialogWithChange('฿75.00');
+  'step six: confirm payment and redirect to cash receipt': (browser) => {
+    const payment = browser.page.Payment();
+    payment.navigateToThankYou(browser);
+  },
+
+  'step seven: validate sub total, discount, total, cash, and change': (browser) => {
+    const thankyou = browser.page.ThankYou();
+
+    thankyou.expectPageContainerIsPresent();
+    thankyou.expectSubTotalIsCorrect('฿1,395.00');
+    thankyou.expectDiscountIsCorrect('฿70.00');
+    thankyou.expectTotalIsCorrect('฿1,325.00');
+    thankyou.expectCashIsCorrect('฿1,400.00');
+    thankyou.expectChangeIsCorrect('฿75.00');
+    thankyou.navigateToHome(browser);
   },
 
   'final: confirm change and redirect back to home': (browser) => {
     const home = browser.page.Home();
-    const payment = browser.page.Payment();
 
-    payment.navigateToHome(browser);
     home.expectPageContainerIsPresent();
 
     browser.end();
