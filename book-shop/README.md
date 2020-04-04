@@ -88,6 +88,7 @@ npm run unit
 npm run unit:watch
 
 # generate unit test coverage report
+# TOFIX, coverage not working properly with *.vue
 npm run unit:coverage
 
 # run e2e tests
